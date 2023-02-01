@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace NasiaAutoTestsApp
@@ -12,6 +14,8 @@ namespace NasiaAutoTestsApp
         private string _negativePassword;
         private CheckedListBox _check;
         private VendorTests auth;
+        private VendorTests _setup;
+        private List<bool> result= new List<bool>();
 
         public Auth(string login, string password, string instance, string negativeLogin, string negativePassword,
             CheckedListBox check)
@@ -23,34 +27,46 @@ namespace NasiaAutoTestsApp
             _negativePassword = negativePassword;
             _check = check;
         }
-        
-        
 
         //методы с тестом авторизации разных сценариев
         void StartPositiveTest()
         {
-            auth = new VendorTests(_instance, _login, _password);
+            InitializationSetup();
+            auth = new VendorTests( _login, _password);
             auth.Auth();
+            
+            CheckTests("//div[@class='page-title']//h2","Новый договор");
         }
         void StartNegativeLogin()
         {
-            auth = new VendorTests(_instance, _negativeLogin, _password);
+            InitializationSetup();
+            auth = new VendorTests( _negativeLogin, _password);
             auth.Auth();
+            CheckTests("//div[@class='Vue-Toastification__toast Vue-Toastification__toast--error top-right']//div[@role='alert']","Выбранное значение для ID партнера некорректно.");
+            
         }
         void StartNegativePassword()
         {
-            auth = new VendorTests(_instance, _login, _negativePassword);
+            InitializationSetup();
+            auth = new VendorTests( _login, _negativePassword);
             auth.Auth();
+            CheckTests("//div[@class='Vue-Toastification__toast Vue-Toastification__toast--error top-right']//div[@role='alert']","Некорректный пароль");
         }
         void StartNullLogin()
         {
-            auth = new VendorTests(_instance, "", _password);
+            InitializationSetup();
+            auth = new VendorTests( "", _password);
             auth.Auth();
+            CheckTests("//div[@class='n-form-item-feedback__line']","Пожалуйста заполните это поле!");
+
         }
         void StartNullPassword()
         {
-            auth = new VendorTests(_instance, _login, "");
+            InitializationSetup();
+            auth = new VendorTests( _login, "");
             auth.Auth();
+            Thread.Sleep(200);
+            CheckTests("//div[@class='n-form-item-feedback__line']","Пожалуйста заполните это поле!");
         }
         //метод, запускающий тесты в зависимости от выбранных чек-листов.
         public void StartTests()
@@ -75,6 +91,25 @@ namespace NasiaAutoTestsApp
             {
                 StartNullPassword();
             }
+        }
+
+        void CheckTests(string actual, string expected)
+        {
+            if (auth.ActualExpected(actual,expected))
+            {
+                result.Add(true);
+                MessageBox.Show("Тест прошел успешно");
+            }
+            else
+            {
+                result.Add(false);
+                MessageBox.Show("Тест провален");
+            }
+        }
+        void InitializationSetup()
+        {
+            _setup = new VendorTests(_instance);
+            _setup.Setup();
         }
 
 

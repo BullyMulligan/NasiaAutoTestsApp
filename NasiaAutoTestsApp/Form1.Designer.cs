@@ -240,6 +240,7 @@
             this.fieldNegativePasswordVendor.Name = "fieldNegativePasswordVendor";
             this.fieldNegativePasswordVendor.Size = new System.Drawing.Size(67, 22);
             this.fieldNegativePasswordVendor.TabIndex = 3;
+            this.fieldNegativePasswordVendor.Text = "423к43кау";
             // 
             // fieldNegativeLoginVendor
             // 
@@ -248,6 +249,7 @@
             this.fieldNegativeLoginVendor.Name = "fieldNegativeLoginVendor";
             this.fieldNegativeLoginVendor.Size = new System.Drawing.Size(67, 22);
             this.fieldNegativeLoginVendor.TabIndex = 2;
+            this.fieldNegativeLoginVendor.Text = "еуе4534543";
             // 
             // label1
             // 

@@ -8,11 +8,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using OpenQA.Selenium;
 
 namespace NasiaAutoTestsApp
 {
     public partial class Form1 : Form
     {
+        public static IWebDriver Driver;
         private Log _log;
         private Auth positiveAuth;
         private NewBuyerVendor positiveNewBuyer;

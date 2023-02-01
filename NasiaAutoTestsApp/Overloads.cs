@@ -14,51 +14,34 @@ namespace NasiaAutoTestsApp
 {
     public class Overloads
     {
-        private IWebDriver _driver;
-        private Log _log;
-
-        public Overloads(IWebDriver driver,Log log)
-        {
-            _driver = driver;
-            _log = log;
-        }
-
         public void Click(By element)
         {
-            Thread.Sleep(700);
-            IWebElement clickElement = _driver.FindElement(element);
+            Thread.Sleep(500);
+            IWebElement clickElement = Form1.Driver.FindElement(element);
             if (clickElement.Enabled && clickElement.Displayed)
             {
-                _driver.FindElement(element).Click();
-                _log.AddLogs($"element {element} is clicked");
+                Form1.Driver.FindElement(element).Click();
             }
             
         }
         public void Click(By element,int index)
         {
-            Thread.Sleep(700);
-            _driver.FindElements(element)[index].Click();
-            _log.AddLogs($"element {element} is clicked");
+            Thread.Sleep(500);
+            Form1.Driver.FindElements(element)[index].Click();
         }
 
         public void SendKeys(By element,string text)
         {
-            _driver.FindElement(element).SendKeys(text);
-            _log.AddLogs($"text:'{text}' is insented in field element {element}");
+            Form1.Driver.FindElement(element).SendKeys(text);
         }
         public void SendKeys(By element,int index,string text)
         {
-            _driver.FindElements(element)[index].SendKeys(text);
-            _log.AddLogs($"text:'{text}' is insented in field element {element}");
+            Form1.Driver.FindElements(element)[index].SendKeys(text);
         }
 
         public void Clear(By element)
         {
-            _driver.FindElement(element).Clear();
-            _log.AddLogs($"element {element} is cleared");
+            Form1.Driver.FindElement(element).Clear();
         }
-
-        
-        
     }
 }

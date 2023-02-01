@@ -40,3 +40,45 @@ C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\obj\Debug\Nasi
 C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\SeleniumExtras.WaitHelpers.dll
 C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\nunit.framework.dll
 C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\nunit.framework.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\selenium-manager\linux\selenium-manager
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\selenium-manager\macos\selenium-manager
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\selenium-manager\windows\selenium-manager.exe
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\NasiaAutoTestsApp.exe.config
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\NasiaAutoTestsApp.exe
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\NasiaAutoTestsApp.pdb
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\Google.Protobuf.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\K4os.Compression.LZ4.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\K4os.Compression.LZ4.Streams.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\K4os.Hash.xxHash.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\MySql.Data.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\nunit.framework.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\SeleniumExtras.WaitHelpers.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\System.Buffers.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\System.Memory.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\WebDriver.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\WebDriver.Support.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\ZstdNet.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\BouncyCastle.Crypto.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\Google.Protobuf.pdb
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\Google.Protobuf.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\K4os.Compression.LZ4.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\K4os.Compression.LZ4.Streams.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\K4os.Hash.xxHash.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\MySql.Data.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\nunit.framework.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\System.Buffers.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\System.Memory.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\obj\Debug\NasiaAutoTestsApp.csproj.AssemblyReference.cache
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\obj\Debug\NasiaAutoTestsApp.csproj.SuggestedBindingRedirects.cache
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\obj\Debug\NasiaAutoTestsApp.Form1.resources
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\obj\Debug\NasiaAutoTestsApp.Properties.Resources.resources
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\obj\Debug\NasiaAutoTestsApp.csproj.GenerateResource.cache
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\obj\Debug\NasiaAutoTestsApp.csproj.CoreCompileInputs.cache
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\obj\Debug\NasiaAutoTestsApp.csproj.CopyComplete
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\obj\Debug\NasiaAutoTestsApp.exe
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\obj\Debug\NasiaAutoTestsApp.pdb

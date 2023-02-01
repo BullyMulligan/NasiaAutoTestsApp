@@ -6,7 +6,6 @@ namespace NasiaAutoTestsApp
 {
     public class NewBuyerVendor
     {
-       
         private string _login;
         private Log _log;
         private string _password;
@@ -14,6 +13,8 @@ namespace NasiaAutoTestsApp
         private CheckedListBox _check;
         private string _buyer;
         private string _negativeBuyer;
+        private VendorTests _setup;
+        private VendorTests _auth;
         private VendorTests _newBuyer;
         public string _card;
         private string _date;
@@ -38,7 +39,11 @@ namespace NasiaAutoTestsApp
         //позитивный сценарий. Все данные верны, тест должен быть пройден и создать клиента
         void StartPositiveTest()
         {
-            _newBuyer = new VendorTests(_instance, _login, _password, _buyer,_card,_date,_photo);
+            //инициализируем данные настройки перед тестом
+            InitializationSetup();
+            //инициализируем данные самого теста
+            _newBuyer = new VendorTests(_buyer,_card,_date,_photo);
+            //запускаем
             _newBuyer.NewBuyer();
             
             //проверяем, верен ли результат теста
@@ -48,6 +53,7 @@ namespace NasiaAutoTestsApp
         //пустое поле ввода мешает нам закончить тест
         void startNullPhoneTests()
         {
+            InitializationSetup();
             _newBuyer = new VendorTests(_instance, _login, _password, "",_card,_date,_photo);
             _newBuyer.NewBuyer();
             
@@ -59,30 +65,40 @@ namespace NasiaAutoTestsApp
         //пробуем нажать на кнопку отправки ОТП кода, оставив поле ОТП пустым
         void StartNullOTPTest()
         {
-            _newBuyer = new VendorTests(_instance, _login, _password, _buyer,"",_card,_date,_photo);
+            InitializationSetup();
+            _newBuyer = new VendorTests( _buyer,"",_card,_date,_photo);
             _newBuyer.NewBuyer();
             
+            CheckTests("(//span[@class='error-text'])[2]","Пожалуйста заполните это поле!");
         }
 
         //пробуем ввести неверный ОТП-код
         void StartNegativeOTPTest()
         {
-            _newBuyer = new VendorTests(_instance, _login, _password, _buyer,"0000",_card,_date,_photo);
+            InitializationSetup();
+            _newBuyer = new VendorTests( _buyer,"1234",_card,_date,_photo);
             _newBuyer.NewBuyer();
+            CheckTests("//div[@role='alert']","СМС код неверный");
         }
 
         //какрта и телефон пользователя не связаны друг с другом
         void StartNegativePhoneWithCard()
         {
-            _newBuyer = new VendorTests(_instance, _login, _password, _negativeBuyer,_card,_date,_photo);
+            InitializationSetup();
+            _newBuyer = new VendorTests(_negativeBuyer,_card,_date,_photo);
+            
             _newBuyer.NewBuyer();
+            //MessageBox.Show("");
+            CheckTests("//div[@class='Vue-Toastification__toast Vue-Toastification__toast--error top-right']//div[@role='alert']","Телефон клиента не совпадает с телефоном смс информирования карты");
         }
 
         //номера телефонов гарантов идентичны
         void StartEqualsGuarantsTests()
         {
-            _newBuyer = new VendorTests(_instance, _login, _password, _buyer,_card,_date,_photo,true);
+            InitializationSetup();
+            _newBuyer = new VendorTests(_buyer,_card,_date,_photo,true);
             _newBuyer.NewBuyer();
+            CheckTests("//div[@label='Номер телефона']//span[@class='error-text']","Нельзя вводить одинаковые номера! ");
         }
         
         //метод, запускающий тесты в зависимости от того, включен ли данный тест
@@ -120,13 +136,19 @@ namespace NasiaAutoTestsApp
             if (_newBuyer.ActualExpected(actual,expected))
             {
                 result.Add(true);
-                MessageBox.Show("Ntcn прошел успешно");
+                MessageBox.Show("Тест прошел успешно");
             }
             else
             {
                 result.Add(false);
-                MessageBox.Show("Ntcn провален");
+                MessageBox.Show("Тест провален");
             }
+        }
+
+        void InitializationSetup()
+        {
+            _setup = new VendorTests(_instance);_setup.Setup();
+            _auth = new VendorTests(_login, _password);_auth.Auth();
         }
     }
 }

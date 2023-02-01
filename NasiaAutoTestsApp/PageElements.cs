@@ -4,28 +4,31 @@ namespace NasiaAutoTestsApp
 {
     public class PagesElements
     {
-        public IWebDriver driver;
-        
-        protected readonly By _fieldNewBuyerVendor = By.XPath("//input[@class='n-input__input-el']");//поле номера нового клиента
+        protected readonly By _fieldNewBuyerVendor = By.XPath("//section[@class='client-section']//input[@class='n-input__input-el']");//поле номера нового клиента
         protected readonly By _listButtonsSideBar = By.XPath("//aside[@class='sidebar']//ul//li");//сайдбар
         protected readonly By _fieldPhotoVendor = By.XPath("//input[@class='n-upload-file-input']");//поле вставки фото
-        protected readonly By _messageSuccessAddCard = By.XPath("//div[@class='n-alert-body__content']");//сообщение об успешном добавлении карты
+        protected readonly By _messageErrorCardNotPhone = By.XPath("//div[@class='Vue-Toastification__toast Vue-Toastification__toast--error top-right']//div[@role='alert']");//сообщение о том, что карта не привязана к телефону
         protected readonly By _buttonNewBuyerVendor = By.XPath("//form[@class='client__phone']//button/span[text()='Получить СМС']");//кнопка создания нового клиента
         protected readonly By _buttonOtpNewBuyerVendor =By.XPath("//section[@class='client-section'][1]//button/span[text()='Подтвердить']");//кнопка отправить отп код
-
+        protected readonly By _fieldCardNumberBuyerVendor = By.XPath("(//form[@class='client__card']//input[@class='n-input__input-el'])[1]");//поле карты клиента
+        protected readonly By _fieldCardDataBuyerVendor = By.XPath("(//form[@class='client__card']//input[@class='n-input__input-el'])[2]");//поле даты карты клиента
         protected readonly By _buttonSavePhotosVendor =
             By.XPath("//div[@class='tab']//button/span[text()='Сохранить']");//кнопка сохранить фотографии
         protected readonly By _buttonCheckCardVendor =
             By.XPath("//section[@class='client-section block-card'][1]//button/span[text()='Получить СМС']");//кнопка, отправляющая данные карты на сервер
+
+        protected readonly By _fieldOtpCardCode =
+            By.XPath("//div[@class='row-wrap client__card-sms']//input[@class='n-input__input-el']");//поле ввода ОТП кода для проверки карты
         protected readonly By _buttonCheckCardOTPVendor =
             By.XPath("//section[@class='client-section block-card'][1]//button/span[text()='Подтвердить']");//кнопка, отправляющая данные карты на сервер
+        
         protected readonly By _buttonSaveBuyerVendor = By.XPath("//div[@class='client__guarants-save']//button//span[text()='Сохранить']");//добавить покупателя
         protected readonly By _fieldName1 = By.Name("name_1");//поле имя доверителя 1
         protected readonly By _fieldName2 = By.Name("name_2");//поле имя доверителя 2
         protected readonly By _fieldGarantNumber1 = By.Name("guarantPhone-1");//поле ввода телефона доверителя 1
         protected readonly By _fieldGarantNumber2 = By.Name("guarantPhone-2");//поле ввода телефона доверителя 2
         public readonly By _exMessage = By.XPath("//span[@class='error-text']");
-        protected readonly By _fieldOTPCode = By.XPath("//form[@class='client__phone']//input[@class='n-input__input-el']");
+        protected readonly By _fieldOTPCode = By.XPath("//div[@class='row-wrap'][2]//input[@class='n-input__input-el']");
         protected readonly By _btnPrintClientAct = By.XPath("//a[@class='btn btn-orange mr-2']");
         private readonly By _photoClient = By.XPath("//div[@class='d-flex flex-row-reverse justify-content-between align-items-center custom-file']");
         private readonly By _act = By.XPath("//div[@class='d-flex flex-row-reverse justify-content-between align-items-center custom-file mb-3']");

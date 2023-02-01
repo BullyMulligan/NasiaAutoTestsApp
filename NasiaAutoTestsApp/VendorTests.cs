@@ -1,39 +1,67 @@
 using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading;
-using System.Windows.Forms;
-using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
 
 namespace NasiaAutoTestsApp
 {
-    
+    //в данном классе запускаются тесты селениум. Тесты модульные, то есть, чтобы запустить создание нового клиента,
+    //необходимо запустить преднастройку драйвера, затем пройти авторизацию, а затем сам тест
     public class VendorTests:PagesElements
     {
         private DataBase _responce;
-        Log log = new Log();
         private string _instance;
         private string _login;
         private string _password;
         private string _buyer;
-        private IWebDriver driver;
-        private Overloads _test;
+        private Overloads _test= new Overloads();
         public string _otpCode;
         private string _card;
         private string _date;
         private string _photo;
         private bool _equal;
-        private WebDriverWait wait;
         public bool result;
-        
-        public VendorTests(string instance,string login,string password)
+
+        public VendorTests(string instance)
+        {
+            _instance = instance;
+        }
+        public VendorTests(string login,string password)
         {
             _login = login;
             _password = password;
-            _instance = instance;
+        }
+        public VendorTests(string buyer,string otpCode,string card,string date,string photo)
+        {
+            _buyer = buyer;
+            _card = card;
+            _date = date;
+            _otpCode = otpCode;
+            _photo = photo;
+        }
+        public VendorTests(string buyer,string card,string date,string photo,bool equal)
+        {
+            _buyer = buyer;
+            _card = card;
+            _date = date;
+            _photo = photo;
+            _equal = equal;
+        }
+        public VendorTests(string buyer,string otpCode,string card,string date,string photo,bool equal)
+        {
+            _buyer = buyer;
+            _card = card;
+            _date = date;
+            _photo = photo;
+            _equal = equal;
+        }
+        public VendorTests(string buyer,string card,string date,string photo)
+        {
+            _buyer = buyer;
+            _card = card;
+            _date = date;
+            _photo = photo;
         }
         public VendorTests(string instance,string login,string password,string buyer,string card,string date,string photo,bool equal)
         {
@@ -70,28 +98,26 @@ namespace NasiaAutoTestsApp
             _photo = photo;
         }
 
-        private void Setup()
+        //метод преднастройки тестов. Открывает браузер, настраивает таймспаны
+        public void Setup()
         {
-            log.LogMessage = new List<string>();
-            log.TimeList = new List<string>();
-            driver = new OpenQA.Selenium.Chrome.ChromeDriver();//открываем Хром
-            _test = new Overloads(driver, log);
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            driver.Navigate().GoToUrl($"https://{_instance}.paymart.uz/ru");//вводим адрес сайта
-            driver.Manage().Window.Maximize();//открыть в полном окне
-            driver.Manage().Timeouts().ImplicitWait=TimeSpan.FromSeconds(10);
-            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(20);
-            driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(10);
+            Form1.Driver = new OpenQA.Selenium.Chrome.ChromeDriver();//открываем Хром
+            Form1.Driver.Navigate().GoToUrl($"https://{_instance}.paymart.uz/ru");//вводим адрес сайта
+            Form1.Driver.Manage().Window.Maximize();//открыть в полном окне
+            Form1.Driver.Manage().Timeouts().ImplicitWait=TimeSpan.FromSeconds(10);
+            Form1.Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(20);
+            Form1.Driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(10);
         }
 
+        //метод авторизации
         public void  Auth()
         {
-            Setup();
             _test.SendKeys(_fieldIdVendor,_login);
             _test.SendKeys(_fieldPasswordVendor,_password);
             _test.Click(_authButton);
         }
 
+        //метод создания нового пользователя
         public void NewBuyer()
         {
             try
@@ -99,15 +125,11 @@ namespace NasiaAutoTestsApp
                 //удаляем пользователя из базы
                 _responce = new DataBase("10.20.33.5", "paym_kayden", "dev-base", "Xe3nQx287");
                 _responce.DeleteUser(_buyer);
-                MessageBox.Show("Пользователь удален!");
-                
-                //проходим авторизацию
-                Auth();
                 
                 //нажимаем на кнопку сайдабара(3), вводим номер покупателя и жмем кнопку "отправить ОТП-код"
                 _test.Click(_listButtonsSideBar,3);
                 _test.SendKeys(_fieldNewBuyerVendor,_buyer);
-                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(_buttonNewBuyerVendor));
+                //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(_buttonNewBuyerVendor));
                 _test.Click(_buttonNewBuyerVendor);
 
                 //если мы не передаем конкретный отп в тест, то берем его из базы
@@ -121,27 +143,35 @@ namespace NasiaAutoTestsApp
                 }
                 
                 //вставляем его в поле и жмем кнопку "Отправить"
-                _test.SendKeys(_fieldNewBuyerVendor,1,_otpCode);
+                _test.SendKeys(_fieldOTPCode,_otpCode);
                 _test.Click(_buttonOtpNewBuyerVendor);
                 
             
                 //вводим номер карты, дату и жмем на кнопку запроса ОТП
-                _test.SendKeys(_fieldNewBuyerVendor,2,_card);
-                _test.SendKeys(_fieldNewBuyerVendor,3,_date);
-                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(_buttonCheckCardVendor));
+                _test.SendKeys(_fieldCardNumberBuyerVendor,_card);
+                _test.SendKeys(_fieldCardDataBuyerVendor,_date);
+                //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(_buttonCheckCardVendor));
                 _test.Click(_buttonCheckCardVendor);
-            
-                //берем отп из базы, он должен отличаться от предыдущего кода
-                while (_responce.code==_otpCode)
+
+                if (Form1.Driver.FindElements(_messageErrorCardNotPhone).Count==0)
                 {
-                    _responce.request = "select code from otp_enter_code_attempts WHERE phone = 998"+_buyer;
-                    Thread.Sleep(500);
-                    _responce.GetOTP();
+                    //берем отп из базы, он должен отличаться от предыдущего кода
+                    while (_responce.code==_otpCode)
+                    {
+                        _responce.request = "select code from otp_enter_code_attempts WHERE phone = 998"+_buyer;
+                        Thread.Sleep(500);
+                        _responce.GetOTP();
+                    }
+                }
+                else
+                {
+                    return;
                 }
                 _otpCode = _responce.code;
-            
+
+                
                 //заполняем поле отп кодом и жмем кнопку "отправить"
-                _test.SendKeys(_fieldNewBuyerVendor,4,_otpCode);
+                _test.SendKeys(_fieldOtpCardCode,_otpCode);
                 _test.Click(_buttonCheckCardOTPVendor);
 
                 //далее следует блок с заливкой фотографий
@@ -149,7 +179,8 @@ namespace NasiaAutoTestsApp
                 {
                     _test.SendKeys(_fieldPhotoVendor,i, _photo);
                 }
-                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(_buttonSavePhotosVendor));
+                //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(_buttonSavePhotosVendor));
+                Thread.Sleep(500);
                 _test.Click(_buttonSavePhotosVendor);
                 
                 //заполняем поля с доверителями
@@ -174,7 +205,7 @@ namespace NasiaAutoTestsApp
                     _test.SendKeys(_fieldGarantNumber2,"9");
                 }
             
-                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable((_buttonSaveBuyerVendor)));
+                //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable((_buttonSaveBuyerVendor)));
                 _test.Click(_buttonSaveBuyerVendor);
                 
 
@@ -183,20 +214,17 @@ namespace NasiaAutoTestsApp
             catch (Exception e)
             {
             }
-            ;
-
+            
         }
 
-        public Log FindContract(int contract)
+        public void FindContract(int contract)
         {
             Auth();
-            //_test.SendKeys();
-            return log;
         }
 
         public bool ActualExpected(string actual,string expected)
         {
-            if (expected.Replace(" ","")==driver.FindElement(By.XPath(actual)).Text.Replace(" ",""))
+            if (expected.Replace(" ","")==Form1.Driver.FindElement(By.XPath(actual)).Text.Replace(" ",""))
             {
                 Exit();
                 return true;
@@ -204,14 +232,9 @@ namespace NasiaAutoTestsApp
             Exit();
             return false;
         }
-
-       
-
-        
-
         private void Exit()
         {
-            driver.Quit();
+            Form1.Driver.Quit();
         }
     }
 }
