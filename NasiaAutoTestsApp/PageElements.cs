@@ -1,3 +1,4 @@
+using System.Threading;
 using OpenQA.Selenium;
 
 namespace NasiaAutoTestsApp
@@ -27,6 +28,35 @@ namespace NasiaAutoTestsApp
         protected readonly By _fieldName2 = By.Name("name_2");//поле имя доверителя 2
         protected readonly By _fieldGarantNumber1 = By.Name("guarantPhone-1");//поле ввода телефона доверителя 1
         protected readonly By _fieldGarantNumber2 = By.Name("guarantPhone-2");//поле ввода телефона доверителя 2
+
+
+        protected readonly By _fieldVerifyBuyerVendor = By.XPath("//input[@class='n-input__input-el']");
+        protected readonly By _buttonCheckVerifyVendor = By.XPath("//span[text()='Проверить пользователя']");
+
+
+        protected readonly By _fieldNumberBuyerAddProduct = By.XPath("//section[@class='buyer']//div[@name='phone']//input[@class='n-input__input-el']");
+        protected readonly By _buttonFindBuyerAddProduct = By.XPath("//button//span[text()='Найти покупателя']");
+        protected readonly By _selectCategoryProduct = By.XPath("//div[@class='n-select dependence-select']");
+        protected readonly By _selectElementCategory = By.XPath("//div[text()='Бытовая техника']");
+        protected readonly By _selectCategoryCreatedFood = By.XPath("(//div[@class='n-select dependence-select'])[2]");
+        protected readonly By _selectElementCreatedFood = By.XPath("//div[text()='Приготовление блюд']");
+        protected readonly By _selectCategoryMicroVawe = By.XPath("(//div[@class='n-select dependence-select'])[3]");
+        protected readonly By _selectElementMicroVawe = By.XPath("//div[text()='Микроволновая печь']");
+        protected readonly By _selectCategoryDaewoo = By.XPath("(//div[@class='n-select dependence-select'])[4]");
+        protected readonly By _selectElementDaewoo = By.XPath("(//div[@class='v-vl-visible-items'])[4]//div[1]");
+        protected readonly By _selectCategoryModel = By.XPath("(//div[@class='n-select dependence-select'])[5]");
+        protected readonly By _selectElementModel = By.XPath("(//div[@class='v-vl-visible-items'])[5]//div[1]");
+        protected readonly By _fieldProductPrice = By.XPath("(//input[@class='n-input__input-el'])[3]");
+        protected readonly By _buttonAddProduct = By.XPath("//span[text()='Добавить товар']");
+        protected readonly By _listCalculate = By.XPath("//section[@class='calculate']//div[@class='n-base-selection-label']");
+        protected readonly By _elementCalculate = By.XPath("//div[text()='9 месяц']");
+        protected readonly By _buttonAddContract = By.XPath("//span[text()='Создать договор']");
+        protected readonly By _buttonSaveContract = By.XPath("//span[text()='Сохранить']");
+        
+        
+        
+        protected readonly By _fieldFindByContractNumber = By.XPath("//input[@placeholder='Поиск по номер договора']");
+        
         public readonly By _exMessage = By.XPath("//span[@class='error-text']");
         protected readonly By _fieldOTPCode = By.XPath("//div[@class='row-wrap'][2]//input[@class='n-input__input-el']");
         protected readonly By _btnPrintClientAct = By.XPath("//a[@class='btn btn-orange mr-2']");

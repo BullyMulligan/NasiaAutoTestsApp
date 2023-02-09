@@ -9,20 +9,18 @@ namespace NasiaAutoTestsApp
         
         private string _login;
         private string _password;
-        private string _instance;
         private string _negativeLogin;
         private string _negativePassword;
         private CheckedListBox _check;
         private VendorTests auth;
         private VendorTests _setup;
-        private List<bool> result= new List<bool>();
+        public List<bool> result= new List<bool>();
 
-        public Auth(string login, string password, string instance, string negativeLogin, string negativePassword,
+        public Auth(string login, string password, string negativeLogin, string negativePassword,
             CheckedListBox check)
         {
             _login = login;
             _password = password;
-            _instance = instance;
             _negativeLogin = negativeLogin;
             _negativePassword = negativePassword;
             _check = check;
@@ -98,17 +96,15 @@ namespace NasiaAutoTestsApp
             if (auth.ActualExpected(actual,expected))
             {
                 result.Add(true);
-                MessageBox.Show("Тест прошел успешно");
             }
             else
             {
                 result.Add(false);
-                MessageBox.Show("Тест провален");
             }
         }
         void InitializationSetup()
         {
-            _setup = new VendorTests(_instance);
+            _setup = new VendorTests();
             _setup.Setup();
         }
 

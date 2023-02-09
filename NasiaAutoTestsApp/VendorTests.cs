@@ -1,7 +1,10 @@
 using System;
 using System.Threading;
+using System.Windows.Forms;
 using OpenQA.Selenium;
+using OpenQA.Selenium.DevTools.V108.IndexedDB;
 using OpenQA.Selenium.Support.UI;
+using Keys = System.Windows.Forms.Keys;
 
 
 namespace NasiaAutoTestsApp
@@ -11,26 +14,35 @@ namespace NasiaAutoTestsApp
     public class VendorTests:PagesElements
     {
         private DataBase _responce;
-        private string _instance;
         private string _login;
         private string _password;
         private string _buyer;
         private Overloads _test= new Overloads();
+        private string _instance = Form1.Instance;
         public string _otpCode;
         private string _card;
         private string _date;
         private string _photo;
         private bool _equal;
+        private int _contract;
         public bool result;
 
-        public VendorTests(string instance)
+        public VendorTests()
         {
-            _instance = instance;
         }
         public VendorTests(string login,string password)
         {
             _login = login;
             _password = password;
+        }
+        public VendorTests(string buyer)
+        {
+            _buyer=buyer;
+        }
+        public VendorTests(string buyer,int contract)
+        {
+            _buyer=buyer;
+            _contract=contract;
         }
         public VendorTests(string buyer,string otpCode,string card,string date,string photo)
         {
@@ -48,14 +60,7 @@ namespace NasiaAutoTestsApp
             _photo = photo;
             _equal = equal;
         }
-        public VendorTests(string buyer,string otpCode,string card,string date,string photo,bool equal)
-        {
-            _buyer = buyer;
-            _card = card;
-            _date = date;
-            _photo = photo;
-            _equal = equal;
-        }
+        
         public VendorTests(string buyer,string card,string date,string photo)
         {
             _buyer = buyer;
@@ -63,35 +68,11 @@ namespace NasiaAutoTestsApp
             _date = date;
             _photo = photo;
         }
-        public VendorTests(string instance,string login,string password,string buyer,string card,string date,string photo,bool equal)
-        {
-            _login = login;
-            _password = password;
-            _instance = instance;
-            _buyer = buyer;
-            _card = card;
-            _date = date;
-            _photo = photo;
-            _equal = equal;
 
-        }
-        public VendorTests(string instance,string login,string password,string buyer, string otpCode,string card,string date,string photo)
+        public VendorTests(string login,string password,string buyer,string card,string date,string photo)
         {
             _login = login;
             _password = password;
-            _instance = instance;
-            _buyer = buyer;
-            _otpCode = otpCode;
-            _card = card;
-            _date = date;
-            _photo = photo;
-
-        }
-        public VendorTests(string instance,string login,string password,string buyer,string card,string date,string photo)
-        {
-            _login = login;
-            _password = password;
-            _instance = instance;
             _buyer = buyer;
             _card = card;
             _date = date;
@@ -102,7 +83,7 @@ namespace NasiaAutoTestsApp
         public void Setup()
         {
             Form1.Driver = new OpenQA.Selenium.Chrome.ChromeDriver();//открываем Хром
-            Form1.Driver.Navigate().GoToUrl($"https://{_instance}.paymart.uz/ru");//вводим адрес сайта
+            Form1.Driver.Navigate().GoToUrl($"https://{Form1.Instance}.paymart.uz/ru");//вводим адрес сайта
             Form1.Driver.Manage().Window.Maximize();//открыть в полном окне
             Form1.Driver.Manage().Timeouts().ImplicitWait=TimeSpan.FromSeconds(10);
             Form1.Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(20);
@@ -122,6 +103,7 @@ namespace NasiaAutoTestsApp
         {
             try
             {
+                WebDriverWait wait = new WebDriverWait(Form1.Driver, TimeSpan.FromSeconds(10));
                 //удаляем пользователя из базы
                 _responce = new DataBase("10.20.33.5", "paym_kayden", "dev-base", "Xe3nQx287");
                 _responce.DeleteUser(_buyer);
@@ -146,7 +128,6 @@ namespace NasiaAutoTestsApp
                 _test.SendKeys(_fieldOTPCode,_otpCode);
                 _test.Click(_buttonOtpNewBuyerVendor);
                 
-            
                 //вводим номер карты, дату и жмем на кнопку запроса ОТП
                 _test.SendKeys(_fieldCardNumberBuyerVendor,_card);
                 _test.SendKeys(_fieldCardDataBuyerVendor,_date);
@@ -180,7 +161,7 @@ namespace NasiaAutoTestsApp
                     _test.SendKeys(_fieldPhotoVendor,i, _photo);
                 }
                 //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(_buttonSavePhotosVendor));
-                Thread.Sleep(500);
+                Thread.Sleep(1000);
                 _test.Click(_buttonSavePhotosVendor);
                 
                 //заполняем поля с доверителями
@@ -195,7 +176,6 @@ namespace NasiaAutoTestsApp
                     _test.SendKeys(_fieldGarantNumber1,"9");
                     _test.SendKeys(_fieldGarantNumber2,"9");
                 }
-                
                 //если должны
                 else
                 {
@@ -204,22 +184,55 @@ namespace NasiaAutoTestsApp
                     _test.SendKeys(_fieldGarantNumber1,"9");
                     _test.SendKeys(_fieldGarantNumber2,"9");
                 }
-            
-                //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable((_buttonSaveBuyerVendor)));
+                while (Form1.Driver.FindElements(By.XPath("//section[@class='client-section']//div[@class='overlay white']")).Count>0){}
                 _test.Click(_buttonSaveBuyerVendor);
-                
-
-
             }
-            catch (Exception e)
-            {
-            }
-            
+            catch (Exception e){}
         }
 
-        public void FindContract(int contract)
+        public void BuyerStatus()
         {
-            Auth();
+            Thread.Sleep(500);
+            Form1.Driver.Navigate().GoToUrl($"https://{Form1.Instance}.paymart.uz/client/status");
+            _test.SendKeys(_fieldVerifyBuyerVendor, _buyer);
+            _test.Click(_buttonCheckVerifyVendor);
+            Thread.Sleep(1000);
+        }
+
+        public void NewProduct()
+        {
+            try
+            {
+                Thread.Sleep(500);
+                _test.SendKeys(_fieldNumberBuyerAddProduct,_buyer);
+                _test.Click(_buttonFindBuyerAddProduct);
+                _test.Click(_selectCategoryProduct);
+                _test.Click(_selectElementCategory);
+                _test.Click(_selectCategoryCreatedFood);
+                _test.Click(_selectElementCreatedFood);
+                _test.Click(_selectCategoryMicroVawe);
+                _test.Click(_selectElementMicroVawe);
+                _test.Click(_selectCategoryDaewoo);
+                _test.AClick(_selectElementDaewoo);
+                _test.Click(_selectCategoryModel);
+                _test.AClick(_selectElementModel);
+            
+                Thread.Sleep(500);
+                _test.SendKeys(_fieldProductPrice,"10000");
+                _test.Scroll(1000,1000);
+                _test.Click(_listCalculate);
+                Thread.Sleep(500);
+                _test.AClick(_elementCalculate);
+                _test.Click(_buttonAddContract);
+                _test.Click(_buttonSaveContract);
+            }
+            catch (Exception e){}
+        }
+
+        public void FindByContractNumber()
+        {
+            Form1.Driver.Navigate().GoToUrl($"https://{Form1.Instance}.paymart.uz/contracts");
+            _test.SendKeys(_fieldFindByContractNumber,_contract.ToString());
         }
 
         public bool ActualExpected(string actual,string expected)
@@ -229,7 +242,7 @@ namespace NasiaAutoTestsApp
                 Exit();
                 return true;
             }
-            Exit();
+            //Exit();
             return false;
         }
         private void Exit()

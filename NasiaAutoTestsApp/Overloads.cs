@@ -43,5 +43,28 @@ namespace NasiaAutoTestsApp
         {
             Form1.Driver.FindElement(element).Clear();
         }
+
+        public void AClick(By element)
+        {
+            Actions action = new Actions(Form1.Driver);
+            action.Click(Form1.Driver.FindElement(element)).Perform();
+        }
+
+        public void JSClick(By element)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)Form1.Driver;
+            js.ExecuteScript("arguments[0].click();", Form1.Driver.FindElement(element));
+        }
+        public void Scroll(By element)
+        {
+            Actions action = new Actions(Form1.Driver);
+            action.MoveToElement(Form1.Driver.FindElement(element)).Build().Perform();
+        }
+
+        public void Scroll(int vertical, int horizontal)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)Form1.Driver;
+            js.ExecuteScript($"window.scrollBy({vertical},{horizontal})");
+        }
     }
 }

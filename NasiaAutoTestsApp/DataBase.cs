@@ -11,14 +11,14 @@ namespace NasiaAutoTestsApp
         private string _password;
 
         public string request;
-
+        public bool available;
         public string code;
-    
+
         public MySqlConnection _connection;
-        
+
         private MySqlDataReader _reader;
-            
-    
+
+
         public DataBase(string database, string localhost, string userId, string password)
         {
             _database = database;
@@ -26,7 +26,7 @@ namespace NasiaAutoTestsApp
             _userId = userId;
             _password = password;
         }
-            
+
         //добавить соединение MySQL
         public void AddMySQLConnection()
         {
@@ -35,10 +35,10 @@ namespace NasiaAutoTestsApp
             connBuilder.Add("DataBase", _localhost);
             connBuilder.Add("Uid", _userId);
             connBuilder.Add("pwd", _password);
-    
+
             _connection = new MySqlConnection(connBuilder.ConnectionString);
         }
-    
+
         //отправляем команду в БД
         public void GetComand()
         {
@@ -55,23 +55,37 @@ namespace NasiaAutoTestsApp
             MySqlCommand command = new MySqlCommand("delete_user_by_phone;", _connection);
             command.CommandType = CommandType.StoredProcedure;
             //command.Parameters.Add(new MySqlParameter("out_var","" ));
-            command.Parameters.Add(new MySqlParameter("out_var", MySqlDbType.VarChar)).Direction = ParameterDirection.Output;
-            command.Parameters.Add(new MySqlParameter("user_phone_number",$"998{number}" ));
+            command.Parameters.Add(new MySqlParameter("out_var", MySqlDbType.VarChar)).Direction =
+                ParameterDirection.Output;
+            command.Parameters.Add(new MySqlParameter("user_phone_number", $"998{number}"));
             _connection.Open();
             command.ExecuteScalar();
         }
-    
+
         //из строки бд получаем отп-код
         public void StringBDInCode()
         {
-                
             while (_reader.Read())
             {
                 code = _reader.GetString(0);
             }
             _reader.Close();
         }
+
+        private void BuyerAvailability()
+        {
+            while (_reader.Read())
+            {
+                if (_reader.IsDBNull(0))
+                {
+                    available = false;
+                    return;
+                }
+                available = true;
+            }
             
+        }
+        
         //открываем соединение
         public void OpenConnection()
         {
@@ -91,6 +105,31 @@ namespace NasiaAutoTestsApp
             OpenConnection();
             GetComand();
             StringBDInCode();
+            CloseConection();
+        }
+
+        public void SetStatusBuyer(string buyer, int status)
+        {
+            OpenConnection();
+            request = $"update users set status = {status} where phone = '998{buyer}';";
+            GetComand();
+            CloseConection();
+        }
+
+        public void SetLimitBuyer(string buyer, int limit)
+        {
+            OpenConnection();
+            request = $"UPDATE buyer_settings SET `balance` = {limit} WHERE user_id = (SELECT id FROM users WHERE phone = '998{buyer}');";
+            GetComand();
+            CloseConection();
+        }
+
+        public void CheckStatusBuyer(string buyer)
+        {
+            OpenConnection();
+            request = $"select id from users WHERE phone = '998{buyer}';";
+            GetComand();
+            BuyerAvailability();
             CloseConection();
         }
                 

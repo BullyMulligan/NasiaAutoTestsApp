@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
-using OpenQA.Selenium;
 
 namespace NasiaAutoTestsApp
 {
@@ -9,7 +8,6 @@ namespace NasiaAutoTestsApp
         private string _login;
         private Log _log;
         private string _password;
-        private string _instance;
         private CheckedListBox _check;
         private string _buyer;
         private string _negativeBuyer;
@@ -20,13 +18,12 @@ namespace NasiaAutoTestsApp
         private string _date;
         private string _photo;
         private bool _equal;
-        private List<bool> result= new List<bool>();
+        public List<bool> result= new List<bool>();
 
-        public NewBuyerVendor(string login, string password, string instance,string buyer,string negativeBuyer, CheckedListBox check,string card,string date,string photo)
+        public NewBuyerVendor(string login, string password,string buyer,string negativeBuyer, CheckedListBox check,string card,string date,string photo)
         {
             _login = login;
             _password = password;
-            _instance = instance;
             _check = check;
             _buyer = buyer;
             _negativeBuyer=negativeBuyer;
@@ -34,10 +31,17 @@ namespace NasiaAutoTestsApp
             _date = date;
             _photo = photo;
         }
+        public NewBuyerVendor(string buyer,string card,string date,string photo)
+        {
+            _buyer = buyer;
+            _card =card;
+            _date = date;
+            _photo = photo;
+        }
         //методы запускающие разные сценарии теста
         
         //позитивный сценарий. Все данные верны, тест должен быть пройден и создать клиента
-        void StartPositiveTest()
+        public void StartPositiveTest()
         {
             //инициализируем данные настройки перед тестом
             InitializationSetup();
@@ -48,13 +52,16 @@ namespace NasiaAutoTestsApp
             
             //проверяем, верен ли результат теста
             CheckTests("//div[@class='n-form-item-blank']/h1","Покупатель успешно отправлен на модерацию!");
+            DataBase setStatus = new DataBase("10.20.33.5", "paym_kayden", "dev-base", "Xe3nQx287");
+            setStatus.SetStatusBuyer(_buyer,4);
+            setStatus.SetLimitBuyer(_buyer,1000000);
         }
         
         //пустое поле ввода мешает нам закончить тест
         void startNullPhoneTests()
         {
             InitializationSetup();
-            _newBuyer = new VendorTests(_instance, _login, _password, "",_card,_date,_photo);
+            _newBuyer = new VendorTests( _login, _password, "",_card,_date,_photo);
             _newBuyer.NewBuyer();
             
             //проверяем, правильно ли выполнен тест
@@ -136,18 +143,16 @@ namespace NasiaAutoTestsApp
             if (_newBuyer.ActualExpected(actual,expected))
             {
                 result.Add(true);
-                MessageBox.Show("Тест прошел успешно");
             }
             else
             {
                 result.Add(false);
-                MessageBox.Show("Тест провален");
             }
         }
 
         void InitializationSetup()
         {
-            _setup = new VendorTests(_instance);_setup.Setup();
+            _setup = new VendorTests();_setup.Setup();
             _auth = new VendorTests(_login, _password);_auth.Auth();
         }
     }

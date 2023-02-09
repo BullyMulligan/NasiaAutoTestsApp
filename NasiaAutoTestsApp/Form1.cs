@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Management.Instrumentation;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,8 +17,11 @@ namespace NasiaAutoTestsApp
     {
         public static IWebDriver Driver;
         private Log _log;
-        private Auth positiveAuth;
-        private NewBuyerVendor positiveNewBuyer;
+        private Auth _positiveAuth;
+        private NewBuyerVendor _positiveNewBuyer;
+        private BuyerStatus _positiveBuyerStatus;
+        private NewProduct _newProduct;
+        public static string Instance;
         public Form1()
         {
             InitializeComponent();
@@ -58,14 +62,24 @@ namespace NasiaAutoTestsApp
 
         private void buttonStartVendorClick(object sender, EventArgs e)
         {
-            positiveAuth = new Auth(fieldPositiveLoginVendor.Text, fieldPossitivePassVendor.Text, fieldInstanceVendor.Text,
+            InstanctiateStaticValue();
+            _positiveAuth = new Auth(fieldPositiveLoginVendor.Text, fieldPossitivePassVendor.Text, 
                 fieldNegativeLoginVendor.Text, fieldNegativePasswordVendor.Text, checkedListBoxAuthVendor);
-            positiveAuth.StartTests();
-            positiveNewBuyer = new NewBuyerVendor(fieldPositiveLoginVendor.Text, fieldPossitivePassVendor.Text,
-                fieldInstanceVendor.Text, fieldBuyerNumberVendor.Text, fieldNegativeBuyerNumberVendor.Text,
+            _positiveAuth.StartTests();
+            ChangeColorChechBox(checkedListBoxAuthVendor,_positiveAuth.result);
+            
+            _positiveNewBuyer = new NewBuyerVendor(fieldPositiveLoginVendor.Text, fieldPossitivePassVendor.Text,
+                 fieldBuyerNumberVendor.Text, fieldNegativeBuyerNumberVendor.Text,
                 checkedListNewBuyerVendor,fieldCardNumberVendor.Text,fieldCardDateVindor.Text,openPhotoVendor.FileName);
-            positiveNewBuyer.StartTests();
-            label4.Text = positiveNewBuyer._card;
+            _positiveNewBuyer.StartTests();
+            ChangeColorChechBox(checkedListNewBuyerVendor, _positiveNewBuyer.result);
+
+            _positiveBuyerStatus = new BuyerStatus(fieldPositiveLoginVendor.Text, fieldPossitivePassVendor.Text,fieldBuyerNumberVendor.Text,checkedListClientStatus,fieldCardNumberVendor.Text,fieldCardDateVindor.Text,openPhotoVendor.FileName);
+            _positiveBuyerStatus.StartTests();
+            ChangeColorChechBox(checkedListClientStatus,_positiveBuyerStatus.result);
+
+            _newProduct = new NewProduct(fieldPositiveLoginVendor.Text, fieldPossitivePassVendor.Text, fieldBuyerNumberVendor.Text, checkedListNewProduct, fieldCardNumberVendor.Text, fieldCardDateVindor.Text, openPhotoVendor.FileName);
+            _newProduct.StartTests();
         }
 
         //включается при изменении чека позитивных тестов
@@ -81,7 +95,6 @@ namespace NasiaAutoTestsApp
             if (checkBox == checkNegativeVendor)
             {
                 SwitchNegstiveTests();
-                return;
             }
         }
 
@@ -96,8 +109,31 @@ namespace NasiaAutoTestsApp
             {
                 MessageBox.Show("Выберите фото");
             }
-            
-            
+        }
+        //назначаем статические значения, которые будут браться один раз за тест из одного места
+        public void InstanctiateStaticValue()
+        {
+            Instance = fieldInstanceVendor.Text;
+            //поле инстанс и прочие значения, которые останутся едиными для всех тестов
+        }
+        //метод меняет цвет цеклиста, в зависимости от процента пройденных успешно тестов
+        private void ChangeColorChechBox(CheckedListBox checkedListBox,List<bool> result)
+        {
+            if (checkedListBox == checkedListBoxAuthVendor)
+            {
+                var positiveResult = result.Where(a =>  a == true).ToList();
+                if (result.Count==0)
+                {
+                    return;
+                }
+                if (result.Count == positiveResult.Count)
+                {
+                    checkedListBox.BackColor = Color.Aquamarine;
+                    return;
+                }
+                checkedListBox.BackColor = Color.Salmon;
+            }
+
         }
     }
 }
