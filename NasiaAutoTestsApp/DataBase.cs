@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using System.Data;
+using System.Threading;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
 namespace NasiaAutoTestsApp
@@ -13,6 +16,8 @@ namespace NasiaAutoTestsApp
         public string request;
         public bool available;
         public string code;
+
+        public List<string> ids;
 
         public MySqlConnection _connection;
 
@@ -108,6 +113,17 @@ namespace NasiaAutoTestsApp
             CloseConection();
         }
 
+        public void GetIds()
+        {
+            ids = new List<string>();
+            while (_reader.Read())
+            {
+                code = _reader.GetString(0);
+                ids.Add(code);
+            }
+            _reader.Close();
+            ids.Reverse();
+        }
         public void SetStatusBuyer(string buyer, int status)
         {
             OpenConnection();
@@ -132,6 +148,33 @@ namespace NasiaAutoTestsApp
             BuyerAvailability();
             CloseConection();
         }
+
+        public void GetContractId(string buyer)
+        {
+            OpenConnection();
+            request = $"SELECT id FROM contracts WHERE user_id =(SELECT id FROM users WHERE phone = '998{buyer}');";
+            GetComand();
+            GetOTP();
+            CloseConection();
+        }
+
+        public void GetContractsId(string buyer)
+        {
+            OpenConnection();
+            request = $"SELECT id FROM contracts WHERE user_id =(SELECT id FROM users WHERE phone = '998{buyer}');";
+            GetComand();
+            GetIds();
+            CloseConection();
+        }
+        public void GetContractsIdByStatus(string buyer,int status)
+        {
+            OpenConnection();
+            request = $"SELECT id FROM contracts WHERE user_id = (SELECT id FROM users WHERE phone = '998{buyer}') and `status`={status};";
+            GetComand();
+            GetIds();
+            CloseConection();
+        }
+        
                 
     }
 }

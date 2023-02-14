@@ -56,6 +56,8 @@ namespace NasiaAutoTestsApp
         
         
         protected readonly By _fieldFindByContractNumber = By.XPath("//input[@placeholder='Поиск по номер договора']");
+        protected readonly By _fieldFindByPhoneNumber = By.XPath("//input[@placeholder='Поиск по номер телефона']");
+        protected readonly By _tabListStatus = By.XPath("//div[@class='n-tabs-tab-wrapper']");//список вкладок со статусами контрактов
         
         public readonly By _exMessage = By.XPath("//span[@class='error-text']");
         protected readonly By _fieldOTPCode = By.XPath("//div[@class='row-wrap'][2]//input[@class='n-input__input-el']");

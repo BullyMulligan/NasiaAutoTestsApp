@@ -21,6 +21,7 @@ namespace NasiaAutoTestsApp
         private NewBuyerVendor _positiveNewBuyer;
         private BuyerStatus _positiveBuyerStatus;
         private NewProduct _newProduct;
+        private FindContract _findContract;
         public static string Instance;
         public Form1()
         {
@@ -69,7 +70,7 @@ namespace NasiaAutoTestsApp
             ChangeColorChechBox(checkedListBoxAuthVendor,_positiveAuth.result);
             
             _positiveNewBuyer = new NewBuyerVendor(fieldPositiveLoginVendor.Text, fieldPossitivePassVendor.Text,
-                 fieldBuyerNumberVendor.Text, fieldNegativeBuyerNumberVendor.Text,
+                fieldBuyerNumberVendor.Text, fieldNegativeBuyerNumberVendor.Text,
                 checkedListNewBuyerVendor,fieldCardNumberVendor.Text,fieldCardDateVindor.Text,openPhotoVendor.FileName);
             _positiveNewBuyer.StartTests();
             ChangeColorChechBox(checkedListNewBuyerVendor, _positiveNewBuyer.result);
@@ -80,6 +81,12 @@ namespace NasiaAutoTestsApp
 
             _newProduct = new NewProduct(fieldPositiveLoginVendor.Text, fieldPossitivePassVendor.Text, fieldBuyerNumberVendor.Text, checkedListNewProduct, fieldCardNumberVendor.Text, fieldCardDateVindor.Text, openPhotoVendor.FileName);
             _newProduct.StartTests();
+            ChangeColorChechBox(checkedListNewProduct,_newProduct.result);
+
+            //данный набор тестов не работает корректно, так как в сортировке существует баг
+            _findContract = new FindContract(fieldPositiveLoginVendor.Text, fieldPossitivePassVendor.Text, fieldBuyerNumberVendor.Text, checkedListFindContractVendor, fieldCardNumberVendor.Text, fieldCardDateVindor.Text, openPhotoVendor.FileName);
+            _findContract.StartTests();
+            ChangeColorChechBox(checkedListFindContractVendor,_findContract.result);
         }
 
         //включается при изменении чека позитивных тестов
@@ -119,21 +126,17 @@ namespace NasiaAutoTestsApp
         //метод меняет цвет цеклиста, в зависимости от процента пройденных успешно тестов
         private void ChangeColorChechBox(CheckedListBox checkedListBox,List<bool> result)
         {
-            if (checkedListBox == checkedListBoxAuthVendor)
+            var positiveResult = result.Where(a =>  a == true).ToList();
+            if (result.Count==0)
             {
-                var positiveResult = result.Where(a =>  a == true).ToList();
-                if (result.Count==0)
-                {
-                    return;
-                }
-                if (result.Count == positiveResult.Count)
-                {
-                    checkedListBox.BackColor = Color.Aquamarine;
-                    return;
-                }
-                checkedListBox.BackColor = Color.Salmon;
+                return;
             }
-
+            if (result.Count == positiveResult.Count)
+            {
+                checkedListBox.BackColor = Color.Aquamarine;
+                return;
+            }
+            checkedListBox.BackColor = Color.Salmon;
         }
     }
 }

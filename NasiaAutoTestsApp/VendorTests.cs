@@ -35,6 +35,7 @@ namespace NasiaAutoTestsApp
             _login = login;
             _password = password;
         }
+        
         public VendorTests(string buyer)
         {
             _buyer=buyer;
@@ -232,9 +233,25 @@ namespace NasiaAutoTestsApp
         public void FindByContractNumber()
         {
             Form1.Driver.Navigate().GoToUrl($"https://{Form1.Instance}.paymart.uz/contracts");
-            _test.SendKeys(_fieldFindByContractNumber,_contract.ToString());
+            _responce = new DataBase("10.20.33.5", "paym_kayden", "dev-base", "Xe3nQx287");
+            _responce.GetContractId(_buyer);
+            var contract = _responce.code;
+            _test.SendKeys(_fieldFindByContractNumber,contract);
         }
 
+        public void FindByBuyerNumber(int tab)
+        {
+            Form1.Driver.Navigate().GoToUrl($"https://{Form1.Instance}.paymart.uz/contracts");
+            Thread.Sleep(2000);
+            _test.SendKeys(_fieldFindByPhoneNumber,"+998"+_buyer);
+            Thread.Sleep(1000);
+            _test.Click(_tabListStatus,1);
+            Thread.Sleep(1000);
+            _test.Click(_tabListStatus,tab);
+            Thread.Sleep(1000);
+            
+            
+        }
         public bool ActualExpected(string actual,string expected)
         {
             if (expected.Replace(" ","")==Form1.Driver.FindElement(By.XPath(actual)).Text.Replace(" ",""))
@@ -242,7 +259,7 @@ namespace NasiaAutoTestsApp
                 Exit();
                 return true;
             }
-            //Exit();
+            Exit();
             return false;
         }
         private void Exit()

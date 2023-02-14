@@ -64,10 +64,10 @@
             this.checkedListClientStatus = new System.Windows.Forms.CheckedListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.checkedListNewProduct = new System.Windows.Forms.CheckedListBox();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.checkedListFindContractVendor = new System.Windows.Forms.CheckedListBox();
             this.tabBuyer = new System.Windows.Forms.TabPage();
             this.openPhotoVendor = new System.Windows.Forms.OpenFileDialog();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.tabControl1.SuspendLayout();
             this.tabVendor.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -86,7 +86,7 @@
             this.tabControl1.Location = new System.Drawing.Point(9, 10);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1114, 518);
+            this.tabControl1.Size = new System.Drawing.Size(1116, 526);
             this.tabControl1.TabIndex = 0;
             // 
             // tabVendor
@@ -106,7 +106,7 @@
             this.tabVendor.Location = new System.Drawing.Point(4, 25);
             this.tabVendor.Name = "tabVendor";
             this.tabVendor.Padding = new System.Windows.Forms.Padding(3);
-            this.tabVendor.Size = new System.Drawing.Size(1106, 489);
+            this.tabVendor.Size = new System.Drawing.Size(1108, 497);
             this.tabVendor.TabIndex = 0;
             this.tabVendor.Text = "Vendor";
             this.tabVendor.UseVisualStyleBackColor = true;
@@ -122,7 +122,7 @@
             // buttonOpenPhotoVendor
             // 
             this.buttonOpenPhotoVendor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOpenPhotoVendor.Location = new System.Drawing.Point(634, 12);
+            this.buttonOpenPhotoVendor.Location = new System.Drawing.Point(636, 12);
             this.buttonOpenPhotoVendor.Name = "buttonOpenPhotoVendor";
             this.buttonOpenPhotoVendor.Size = new System.Drawing.Size(93, 29);
             this.buttonOpenPhotoVendor.TabIndex = 10;
@@ -151,7 +151,7 @@
             // checkNegativeVendor
             // 
             this.checkNegativeVendor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkNegativeVendor.Location = new System.Drawing.Point(937, 15);
+            this.checkNegativeVendor.Location = new System.Drawing.Point(939, 15);
             this.checkNegativeVendor.Name = "checkNegativeVendor";
             this.checkNegativeVendor.Size = new System.Drawing.Size(131, 25);
             this.checkNegativeVendor.TabIndex = 7;
@@ -162,7 +162,7 @@
             // checkPositiveVendor
             // 
             this.checkPositiveVendor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkPositiveVendor.Location = new System.Drawing.Point(800, 15);
+            this.checkPositiveVendor.Location = new System.Drawing.Point(802, 15);
             this.checkPositiveVendor.Name = "checkPositiveVendor";
             this.checkPositiveVendor.Size = new System.Drawing.Size(131, 25);
             this.checkPositiveVendor.TabIndex = 6;
@@ -209,7 +209,7 @@
             // buttonStartTestsVendor
             // 
             this.buttonStartTestsVendor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStartTestsVendor.Location = new System.Drawing.Point(983, 444);
+            this.buttonStartTestsVendor.Location = new System.Drawing.Point(985, 452);
             this.buttonStartTestsVendor.Name = "buttonStartTestsVendor";
             this.buttonStartTestsVendor.Size = new System.Drawing.Size(98, 30);
             this.buttonStartTestsVendor.TabIndex = 1;
@@ -229,7 +229,7 @@
             this.tabControl2.Location = new System.Drawing.Point(25, 51);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1061, 360);
+            this.tabControl2.Size = new System.Drawing.Size(1063, 368);
             this.tabControl2.TabIndex = 0;
             // 
             // tabPage1
@@ -241,7 +241,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1053, 331);
+            this.tabPage1.Size = new System.Drawing.Size(1055, 339);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Авторизация";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -249,7 +249,7 @@
             // fieldNegativePasswordVendor
             // 
             this.fieldNegativePasswordVendor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.fieldNegativePasswordVendor.Location = new System.Drawing.Point(151, 274);
+            this.fieldNegativePasswordVendor.Location = new System.Drawing.Point(151, 282);
             this.fieldNegativePasswordVendor.Name = "fieldNegativePasswordVendor";
             this.fieldNegativePasswordVendor.Size = new System.Drawing.Size(67, 22);
             this.fieldNegativePasswordVendor.TabIndex = 3;
@@ -258,7 +258,7 @@
             // fieldNegativeLoginVendor
             // 
             this.fieldNegativeLoginVendor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.fieldNegativeLoginVendor.Location = new System.Drawing.Point(150, 242);
+            this.fieldNegativeLoginVendor.Location = new System.Drawing.Point(150, 250);
             this.fieldNegativeLoginVendor.Name = "fieldNegativeLoginVendor";
             this.fieldNegativeLoginVendor.Size = new System.Drawing.Size(67, 22);
             this.fieldNegativeLoginVendor.TabIndex = 2;
@@ -268,7 +268,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.BackColor = System.Drawing.SystemColors.Info;
-            this.label1.Location = new System.Drawing.Point(23, 226);
+            this.label1.Location = new System.Drawing.Point(23, 234);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(211, 85);
             this.label1.TabIndex = 1;
@@ -297,7 +297,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1053, 331);
+            this.tabPage2.Size = new System.Drawing.Size(1055, 339);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Новый покупатель";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -377,7 +377,7 @@
             this.tabPage3.Controls.Add(this.checkedListClientStatus);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1053, 331);
+            this.tabPage3.Size = new System.Drawing.Size(1055, 339);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Статус клиента";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -385,7 +385,7 @@
             // textBox1
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox1.Location = new System.Drawing.Point(149, 276);
+            this.textBox1.Location = new System.Drawing.Point(149, 284);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(67, 22);
             this.textBox1.TabIndex = 7;
@@ -394,7 +394,7 @@
             // textBox2
             // 
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox2.Location = new System.Drawing.Point(148, 244);
+            this.textBox2.Location = new System.Drawing.Point(148, 252);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(67, 22);
             this.textBox2.TabIndex = 6;
@@ -404,7 +404,7 @@
             // 
             this.labelClientVendor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelClientVendor.BackColor = System.Drawing.SystemColors.Info;
-            this.labelClientVendor.Location = new System.Drawing.Point(21, 228);
+            this.labelClientVendor.Location = new System.Drawing.Point(21, 236);
             this.labelClientVendor.Name = "labelClientVendor";
             this.labelClientVendor.Size = new System.Drawing.Size(211, 85);
             this.labelClientVendor.TabIndex = 5;
@@ -426,7 +426,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1053, 331);
+            this.tabPage4.Size = new System.Drawing.Size(1055, 339);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Новый товар";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -440,12 +440,32 @@
             this.checkedListNewProduct.Size = new System.Drawing.Size(216, 123);
             this.checkedListNewProduct.TabIndex = 5;
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.checkedListFindContractVendor);
+            this.tabPage5.Location = new System.Drawing.Point(4, 25);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(1055, 339);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Поиск контракта";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // checkedListFindContractVendor
+            // 
+            this.checkedListFindContractVendor.FormattingEnabled = true;
+            this.checkedListFindContractVendor.Items.AddRange(new object[] { "по номеру контракта", "по номеру пользователя", "все на модерации", "все в рассрочке", "все просроченные", "все отмененные" });
+            this.checkedListFindContractVendor.Location = new System.Drawing.Point(17, 15);
+            this.checkedListFindContractVendor.Name = "checkedListFindContractVendor";
+            this.checkedListFindContractVendor.Size = new System.Drawing.Size(216, 123);
+            this.checkedListFindContractVendor.TabIndex = 6;
+            // 
             // tabBuyer
             // 
             this.tabBuyer.Location = new System.Drawing.Point(4, 25);
             this.tabBuyer.Name = "tabBuyer";
             this.tabBuyer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabBuyer.Size = new System.Drawing.Size(1106, 489);
+            this.tabBuyer.Size = new System.Drawing.Size(1108, 497);
             this.tabBuyer.TabIndex = 1;
             this.tabBuyer.Text = "Buyer";
             this.tabBuyer.UseVisualStyleBackColor = true;
@@ -455,31 +475,11 @@
             this.openPhotoVendor.FileName = "openPhotoVendor";
             this.openPhotoVendor.Filter = "JPG|*.jpg|PNG|*.png|BMP|*.bmp";
             // 
-            // tabPage5
-            // 
-            this.tabPage5.Controls.Add(this.checkedListBox1);
-            this.tabPage5.Location = new System.Drawing.Point(4, 25);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1053, 331);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Поиск контракта";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] { "по номеру контракта", "по номеру пользователя" });
-            this.checkedListBox1.Location = new System.Drawing.Point(17, 15);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(216, 123);
-            this.checkedListBox1.TabIndex = 6;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1135, 533);
+            this.ClientSize = new System.Drawing.Size(1137, 541);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -499,7 +499,7 @@
         }
 
         private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox checkedListFindContractVendor;
 
         private System.Windows.Forms.CheckedListBox checkedListNewProduct;
 

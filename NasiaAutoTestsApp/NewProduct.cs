@@ -35,38 +35,34 @@ namespace NasiaAutoTestsApp
             _date = date;
             _photo = photo;
         }
+        public NewProduct (string login, string password, string buyer,string card,string date,string photo)
+        {
+            _login = login;
+            _password = password;
+            _buyer = buyer;
+            _card = card;
+            _date = date;
+            _photo = photo;
+        }
+
+        
         public void StartPositiveTest()
         {
-            InitializationSetup();
-            _newProduct = new VendorTests(_buyer);
-            ChangeBuyerInDataBase(4);
-            DataBase setStatus = new DataBase("10.20.33.5", "paym_kayden", "dev-base", "Xe3nQx287");
-            setStatus.SetLimitBuyer(_buyer,1000000);
-            _newProduct.NewProduct();
-            
+            CreateNewProduct(4,1000000);
             CheckTests("//div[@class='Vue-Toastification__toast Vue-Toastification__toast--success top-right']//div[@role='alert']","Договор успешно создан и отправлен на модерацию");
 
         }
         public void StartNotVerifyBuyerTest()
         {
-            InitializationSetup();
-            _newProduct = new VendorTests(_buyer);
-            ChangeBuyerInDataBase(1);
-            _newProduct.NewProduct();
+            CreateNewProduct(1,0);
 
             CheckTests("//div[@class='n-alert-body__title']","Необходимо провести регистрацию");
 
         }
         public void StartNotHaveLimitTest()
         {
-            InitializationSetup();
-            _newProduct = new VendorTests(_buyer);
-            ChangeBuyerInDataBase(4);
-            DataBase setStatus = new DataBase("10.20.33.5", "paym_kayden", "dev-base", "Xe3nQx287");
-            setStatus.SetLimitBuyer(_buyer,0);
-            _newProduct.NewProduct();
+            CreateNewProduct(4,0);
 
-            Thread.Sleep(500);
             CheckTests("//div[@class='Vue-Toastification__container top-right']//div[@role='alert']","Сумма договора превышает лимит покупки!");
 
         }
@@ -124,12 +120,21 @@ namespace NasiaAutoTestsApp
             if (_newProduct.ActualExpected(actual, expected))
             {
                 result.Add(true);
-                MessageBox.Show("+");
             }
             else
             {
                 result.Add(false);
             }
+        }
+
+        public void CreateNewProduct(int status,int limit)
+        {
+            InitializationSetup();
+            _newProduct = new VendorTests(_buyer);
+            ChangeBuyerInDataBase(status);
+            DataBase setStatus = new DataBase("10.20.33.5", "paym_kayden", "dev-base", "Xe3nQx287");
+            setStatus.SetLimitBuyer(_buyer,limit);
+            _newProduct.NewProduct();
         }
         
     }
