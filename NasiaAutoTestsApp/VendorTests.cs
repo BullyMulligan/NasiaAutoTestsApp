@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using OpenQA.Selenium;
 using OpenQA.Selenium.DevTools.V108.IndexedDB;
 using OpenQA.Selenium.Support.UI;
+using System.IO;
 using Keys = System.Windows.Forms.Keys;
 
 
@@ -218,7 +219,7 @@ namespace NasiaAutoTestsApp
                 _test.Click(_selectCategoryModel);
                 _test.AClick(_selectElementModel);
             
-                Thread.Sleep(500);
+                Thread.Sleep(1000);
                 _test.SendKeys(_fieldProductPrice,"10000");
                 _test.Scroll(1000,1000);
                 _test.Click(_listCalculate);
@@ -242,13 +243,12 @@ namespace NasiaAutoTestsApp
         public void FindByBuyerNumber(int tab)
         {
             Form1.Driver.Navigate().GoToUrl($"https://{Form1.Instance}.paymart.uz/contracts");
-            Thread.Sleep(2000);
+            
             _test.SendKeys(_fieldFindByPhoneNumber,"+998"+_buyer);
-            Thread.Sleep(1000);
             _test.Click(_tabListStatus,1);
             Thread.Sleep(1000);
             _test.Click(_tabListStatus,tab);
-            Thread.Sleep(1000);
+            while(Form1.Driver.FindElements(By.XPath("(//p)[2]")).Count==0){}
             
             
         }
@@ -256,15 +256,37 @@ namespace NasiaAutoTestsApp
         {
             if (expected.Replace(" ","")==Form1.Driver.FindElement(By.XPath(actual)).Text.Replace(" ",""))
             {
-                Exit();
                 return true;
             }
-            Exit();
+
+            MessageBox.Show(actual);
             return false;
         }
         private void Exit()
         {
             Form1.Driver.Quit();
+        }
+
+        public void CreateFolder(string name,string parentPath)
+        {
+            
+            string folderName = name;
+            string path = Path.Combine(parentPath,folderName);
+            
+            //проверяем наличие папки, если ее не существует, то создаем ее
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            Screenshoot(path);
+            Exit();
+        }
+
+        private void Screenshoot(string path)
+        {
+            Screenshot screenshot = ((ITakesScreenshot)Form1.Driver).GetScreenshot();
+            string now = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+            screenshot.SaveAsFile($"{path}\\{now}.jpeg");
         }
     }
 }

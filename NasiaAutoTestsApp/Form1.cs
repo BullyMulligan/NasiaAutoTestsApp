@@ -23,40 +23,32 @@ namespace NasiaAutoTestsApp
         private NewProduct _newProduct;
         private FindContract _findContract;
         public static string Instance;
+        public string checkStatus;
         public Form1()
         {
             InitializeComponent();
+            CalculationStatusTests();
         }
 
         
         //переключатель позитивных тестов. Включает и выключает все позитивные тесты
-        void SwitchPositiveTests()
-        {
-            if (checkPositiveVendor.Checked)
-            {
-                checkedListBoxAuthVendor.SetItemChecked(0,true);
-            }
-            else
-            {
-                checkedListBoxAuthVendor.SetItemChecked(0,false);
-            }
-        }
+        
         //переключатель позитивных тестов. Включает и выключает все позитивные тесты
-        void SwitchNegstiveTests()
+        void SwitchTests()
         {
+            List<CheckedListBox> list = new List<CheckedListBox>();
+            list.Add(checkedListBoxAuthVendor);
+            list.Add(checkedListNewBuyerVendor);
+            list.Add(checkedListClientStatus);
+            list.Add(checkedListFindContractVendor);
+            list.Add(checkedListNewProduct);
             if (checkNegativeVendor.Checked)
             {
-                checkedListBoxAuthVendor.SetItemChecked(1,true);
-                checkedListBoxAuthVendor.SetItemChecked(2,true);
-                checkedListBoxAuthVendor.SetItemChecked(3,true);
-                checkedListBoxAuthVendor.SetItemChecked(4,true);
+                OnAllCheckBoxes(list);
             }
             else
             {
-                checkedListBoxAuthVendor.SetItemChecked(1,false);
-                checkedListBoxAuthVendor.SetItemChecked(2,false);
-                checkedListBoxAuthVendor.SetItemChecked(3,false);
-                checkedListBoxAuthVendor.SetItemChecked(4,false);
+                OffAllCheckBoxes(list);
             }
         }
         
@@ -93,16 +85,9 @@ namespace NasiaAutoTestsApp
 
         private void checkPositiveVendor_CheckedChanged(object sender, EventArgs e)
         {
-            var checkBox = (CheckBox)sender;
-            if (checkBox == checkPositiveVendor)
-            {
-                SwitchPositiveTests();
-                return;
-            }
-            if (checkBox == checkNegativeVendor)
-            {
-                SwitchNegstiveTests();
-            }
+            SwitchTests();
+            CalculationStatusTests();
+            labelStatusTests.Text = checkStatus;
         }
 
 
@@ -138,5 +123,59 @@ namespace NasiaAutoTestsApp
             }
             checkedListBox.BackColor = Color.Salmon;
         }
+        //метод, включающий все чекбоксы. Передаем лист из всех чек-боксов
+        private void OnAllCheckBoxes(List<CheckedListBox> list)
+        {
+            for (var i = 0; i < list.Count;i++)
+            {
+                for (int j = 0; j < list[i].Items.Count; j++)
+                {
+                    list[i].SetItemChecked(j,true);
+                }
+            }
+        }
+        private void OffAllCheckBoxes(List<CheckedListBox> list)
+        {
+            for (var i = 0; i < list.Count;i++)
+            {
+                for (int j = 0; j < list[i].Items.Count; j++)
+                {
+                    list[i].SetItemChecked(j,false);
+                }
+            }
+        }
+
+        private void CalculationStatusTests()
+        {
+            List<CheckedListBox> list = new List<CheckedListBox>();
+            list.Add(checkedListBoxAuthVendor);
+            list.Add(checkedListNewBuyerVendor);
+            list.Add(checkedListClientStatus);
+            list.Add(checkedListFindContractVendor);
+            list.Add(checkedListNewProduct);
+            int allTests = 0;
+            int checkedTest = 0;
+            for (int i = 0; i < list.Count; i++)
+            {
+                allTests += list[i].Items.Count;
+                for (int j = 0; j < list[i].Items.Count; j++)
+                {
+                    if (list[i].GetItemChecked(j))
+                    {
+                        checkedTest++;
+                    }
+                }
+            }
+            checkStatus = $"Всего тестов:{allTests}\nВыбрано тестов:{checkedTest}";
+        }
+        
+        //меняем статус выбранных тестов при смене состояния чека
+        private void checkedListFindContractVendor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CalculationStatusTests();
+            labelStatusTests.Text = checkStatus;
+        }
+
+        
     }
 }

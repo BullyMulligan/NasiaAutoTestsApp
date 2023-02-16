@@ -139,6 +139,13 @@ namespace NasiaAutoTestsApp
             GetComand();
             CloseConection();
         }
+        public void SetProductStatus(int product, int status)
+        {
+            OpenConnection();
+            request = $"UPDATE contracts SET `status` = {status} WHERE id ={product};";
+            GetComand();
+            CloseConection();
+        }
 
         public void CheckStatusBuyer(string buyer)
         {

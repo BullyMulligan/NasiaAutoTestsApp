@@ -157,7 +157,7 @@ namespace NasiaAutoTestsApp
             CreateIdList();
             if (responce.ids.Count == 0 && list.Count==0)
             {
-                result.Add(false);
+                result.Add(true);
                 MessageBox.Show("+");
                 Form1.Driver.Quit();
                 return;
@@ -175,18 +175,7 @@ namespace NasiaAutoTestsApp
                 MessageBox.Show("-"+" "+responce.ids[0]+list[0]);
             }
             Form1.Driver.Quit();
-            /*for (int i = 0; i < responce.ids.Count; i++)
-            {
-                MessageBox.Show(responce.ids[i] + list[i]);
-                if (responce.ids[i]!=list[i])
-                {
-                    result.Add(false);
-                    MessageBox.Show("-");
-                    return;
-                }
-                result.Add(true);
-                MessageBox.Show("+");
-            }*/
+            
         }
 
         //метод, создающий лист номеров с ID клиента из браузера

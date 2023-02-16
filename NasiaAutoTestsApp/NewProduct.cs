@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
@@ -63,9 +64,32 @@ namespace NasiaAutoTestsApp
         {
             CreateNewProduct(4,0);
 
+            Thread.Sleep(1000);
             CheckTests("//div[@class='Vue-Toastification__container top-right']//div[@role='alert']","Сумма договора превышает лимит покупки!");
 
         }
+        public void StartModerateProduct()
+        {
+            CreateNewProduct(4,1000000,1);
+
+            Thread.Sleep(1000);
+            CheckTests("//div[@class='Vue-Toastification__toast Vue-Toastification__toast--success top-right']//div[@role='alert']","Договор успешно создан и отправлен на модерацию");
+        }
+        public void StartExpiredProduct()
+        {
+            CreateNewProduct(4,1000000,3);
+
+            Thread.Sleep(1000);
+            CheckTests("//div[@class='Vue-Toastification__toast Vue-Toastification__toast--success top-right']//div[@role='alert']","Договор успешно создан и отправлен на модерацию");
+        }
+        public void StartCanceledProduct()
+        {
+            CreateNewProduct(4,1000000,5);
+
+            Thread.Sleep(1000);
+            CheckTests("//div[@class='Vue-Toastification__toast Vue-Toastification__toast--success top-right']//div[@role='alert']","Договор успешно создан и отправлен на модерацию");
+        }
+        
         public void StartTests()
         {
             if (_check.GetItemChecked(0))
@@ -80,12 +104,19 @@ namespace NasiaAutoTestsApp
             {
                 StartNotHaveLimitTest();
             }
-            /*if (_check.GetItemChecked(3))
+            if (_check.GetItemChecked(3))
             {
+                StartModerateProduct();
             }
-            if (_check.GetItemChecked(4))
+            if(_check.GetItemChecked(4))
             {
-            }*/
+                StartExpiredProduct();
+            }
+
+            if (_check.GetItemChecked(5))
+            {
+                StartCanceledProduct();
+            }
         }
         void InitializationSetup()
         {
@@ -135,6 +166,33 @@ namespace NasiaAutoTestsApp
             DataBase setStatus = new DataBase("10.20.33.5", "paym_kayden", "dev-base", "Xe3nQx287");
             setStatus.SetLimitBuyer(_buyer,limit);
             _newProduct.NewProduct();
+        }
+        public void CreateNewProduct(int status,int limit,int productStatus)
+        {
+            InitializationSetup();
+            _newProduct = new VendorTests(_buyer);
+            ChangeBuyerInDataBase(status);
+            DataBase setStatus = new DataBase("10.20.33.5", "paym_kayden", "dev-base", "Xe3nQx287");
+            setStatus.SetLimitBuyer(_buyer,limit);
+            _newProduct.NewProduct();
+            int id = GetLastProduct();
+            setStatus.SetProductStatus(id,productStatus);
+        }
+
+        private int GetLastProduct()
+        {
+            var byXpath = By.XPath("//div[@class='contract__top']//div[1]//H5");
+            //проходим столько раз, сколько номеров показывает браузер
+            var word = Form1.Driver.FindElement(byXpath).Text;
+            string digit = "";
+            foreach (var ch in word)
+            {
+                if (Char.IsDigit(ch))
+                {
+                    digit += ch;
+                } 
+            }
+            return Convert.ToInt32(digit);
         }
         
     }
