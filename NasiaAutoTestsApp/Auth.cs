@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using OpenQA.Selenium;
 
 namespace NasiaAutoTestsApp
 {
@@ -17,6 +18,7 @@ namespace NasiaAutoTestsApp
         private VendorTests auth;
         private VendorTests _setup;
         public List<bool> result= new List<bool>();
+        public List<Screenshot> screens = new List<Screenshot>();
 
         public Auth(string login, string password, string negativeLogin, string negativePassword,
             CheckedListBox check)
@@ -125,6 +127,7 @@ namespace NasiaAutoTestsApp
                 Directory.CreateDirectory(path);
             }
             auth.CreateFolder(name,path);
+            screens.Add(auth.screenshot);
         }
 
 

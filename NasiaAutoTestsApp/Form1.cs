@@ -176,6 +176,11 @@ namespace NasiaAutoTestsApp
             labelStatusTests.Text = checkStatus;
         }
 
-        
+
+        //при выборе элемента чек-бокса отображать скриншот
+        private void checkedListBoxAuthVendor_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

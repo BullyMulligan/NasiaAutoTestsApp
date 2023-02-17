@@ -27,6 +27,7 @@ namespace NasiaAutoTestsApp
         private bool _equal;
         private int _contract;
         public bool result;
+        public Screenshot screenshot;
 
         public VendorTests()
         {
@@ -284,7 +285,7 @@ namespace NasiaAutoTestsApp
 
         private void Screenshoot(string path)
         {
-            Screenshot screenshot = ((ITakesScreenshot)Form1.Driver).GetScreenshot();
+            screenshot = ((ITakesScreenshot)Form1.Driver).GetScreenshot();
             string now = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
             screenshot.SaveAsFile($"{path}\\{now}.jpeg");
         }
