@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Management.Instrumentation;
 using System.Text;
@@ -174,13 +175,37 @@ namespace NasiaAutoTestsApp
         {
             CalculationStatusTests();
             labelStatusTests.Text = checkStatus;
+
+            CheckedListBox checkedListBox = (CheckedListBox)sender;
+            if (_positiveAuth!=null)
+            {
+                pictureBoxAuth.Image = _positiveAuth.screens[checkedListBox.SelectedIndex];
+            }
         }
 
 
-        //при выборе элемента чек-бокса отображать скриншот
-        private void checkedListBoxAuthVendor_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            throw new System.NotImplementedException();
-        }
+       private void DeleteAllScreenshots()
+       {
+           string targetDirectory = AppDomain.CurrentDomain.BaseDirectory;
+           string exceptionFolderName = "selenium-manager"; // Имя папки, которую нужно оставить
+
+            // Получаем список всех папок в директории
+           string[] directories = Directory.GetDirectories(targetDirectory);
+
+            // Проходим по каждой папке и удаляем ее, если ее имя отличается от исключенной папки
+           foreach (string dir in directories)
+           {
+               string directoryName = new DirectoryInfo(dir).Name;
+               if (directoryName != exceptionFolderName)
+               {
+                   Directory.Delete(dir, true);
+               }
+           }
+       }
+
+       private void button1_Click(object sender, EventArgs e)
+       {
+           DeleteAllScreenshots();
+       }
     }
 }

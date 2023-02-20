@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
@@ -18,7 +19,7 @@ namespace NasiaAutoTestsApp
         private VendorTests auth;
         private VendorTests _setup;
         public List<bool> result= new List<bool>();
-        public List<Screenshot> screens = new List<Screenshot>();
+        public List<Image> screens = new List<Image>();
 
         public Auth(string login, string password, string negativeLogin, string negativePassword,
             CheckedListBox check)
@@ -80,21 +81,41 @@ namespace NasiaAutoTestsApp
             {
                 StartPositiveTest();
             }
+            else
+            {
+                screens.Add(null);
+            }
             if (_check.GetItemChecked(1))
             {
                 StartNegativeLogin();
+            }
+            else
+            {
+                screens.Add(null);
             }
             if (_check.GetItemChecked(2))
             {
                 StartNegativePassword();
             }
+            else
+            {
+                screens.Add(null);
+            }
             if (_check.GetItemChecked(3))
             {
                 StartNullLogin();
             }
+            else
+            {
+                screens.Add(null);
+            }
             if (_check.GetItemChecked(4))
             {
                 StartNullPassword();
+            }
+            else
+            {
+                screens.Add(null);
             }
         }
 
@@ -127,7 +148,14 @@ namespace NasiaAutoTestsApp
                 Directory.CreateDirectory(path);
             }
             auth.CreateFolder(name,path);
-            screens.Add(auth.screenshot);
+            byte[] screenshotBytes = Convert.FromBase64String(auth.screenshot.AsBase64EncodedString);
+
+            // Создаем MemoryStream на основе массива байтов
+            MemoryStream ms = new MemoryStream(screenshotBytes);
+
+            // Создаем объект типа System.Drawing.Image на основе MemoryStream
+            Image image = Image.FromStream(ms);
+            screens.Add(image);
         }
 
 
