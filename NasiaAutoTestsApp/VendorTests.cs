@@ -28,6 +28,7 @@ namespace NasiaAutoTestsApp
         private int _contract;
         public bool result;
         public Screenshot screenshot;
+        private NewBuyerVendor.PasportData _pasportData;
 
         public VendorTests()
         {
@@ -54,6 +55,14 @@ namespace NasiaAutoTestsApp
             _date = date;
             _otpCode = otpCode;
             _photo = photo;
+        }
+        public VendorTests(string buyer,string card,string date,string photo,NewBuyerVendor.PasportData pasportData)
+        {
+            _buyer = buyer;
+            _card = card;
+            _date = date;
+            _photo = photo;
+            _pasportData = pasportData;
         }
         public VendorTests(string buyer,string card,string date,string photo,bool equal)
         {
@@ -86,7 +95,7 @@ namespace NasiaAutoTestsApp
         public void Setup()
         {
             Form1.Driver = new OpenQA.Selenium.Chrome.ChromeDriver();//открываем Хром
-            Form1.Driver.Navigate().GoToUrl($"https://{Form1.Instance}.paymart.uz/ru");//вводим адрес сайта
+            Form1.Driver.Navigate().GoToUrl($"https://{_instance}.uzumnasiya.uz/ru");//вводим адрес сайта
             Form1.Driver.Manage().Window.Maximize();//открыть в полном окне
             Form1.Driver.Manage().Timeouts().ImplicitWait=TimeSpan.FromSeconds(10);
             Form1.Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(20);
@@ -104,31 +113,56 @@ namespace NasiaAutoTestsApp
         //метод создания нового пользователя
         public void NewBuyer()
         {
-            try
+            //try
             {
                 WebDriverWait wait = new WebDriverWait(Form1.Driver, TimeSpan.FromSeconds(10));
                 //удаляем пользователя из базы
-                _responce = new DataBase("10.20.33.5", "paym_kayden", "dev-base", "Xe3nQx287");
+                _responce = new DataBase("10.20.33.5", "paym_tera", "dev-base", "Xe3nQx287");
                 _responce.DeleteUser(_buyer);
                 
                 //нажимаем на кнопку сайдабара(3), вводим номер покупателя и жмем кнопку "отправить ОТП-код"
                 _test.Click(_listButtonsSideBar,3);
-                _test.SendKeys(_fieldNewBuyerVendor,_buyer);
-                //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(_buttonNewBuyerVendor));
-                _test.Click(_buttonNewBuyerVendor);
+                _test.Click(_buttonNextStep);
+                
+                //переходим на фрейм
+                IWebElement iframeElement = Form1.Driver.FindElement(By.XPath("//iframe[@allow='camera;']"));
+                Form1.Driver.SwitchTo().Frame(iframeElement);
 
+                _test.JSClick(_fieldNewBuyerVendor);
+                
+                
+                _test.SendKeys(_fieldNewBuyerVendor,_buyer);
+                
+                //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(_buttonNewBuyerVendor));
+                _test.Click(_checkboxAgree);
+                _test.Click(_buttonNewBuyerVendor);
+                
                 //если мы не передаем конкретный отп в тест, то берем его из базы
                 if (_otpCode==null)
                 {
-                    _responce = new DataBase("10.20.33.5", "paym_kayden", "dev-base", "Xe3nQx287");
+                    _responce = new DataBase("10.20.33.5", "paym_tera", "dev-base", "Xe3nQx287");
                     _responce.request = "select code from otp_enter_code_attempts WHERE phone = 998"+_buyer;
                     Thread.Sleep(500);
                     _responce.GetOTP();
                     _otpCode = _responce.code;
                 }
+                //вводим цифры отп-кода в раздельные поля
+                for (int i = 0; i < _otpCode.Length; i++)
+                {
+                    Form1.Driver.FindElements(_fieldOtp)[i].SendKeys(_otpCode[i].ToString());
+                }
+                
+                //заполняем паспортные данные
+                _test.SendKeys(_fieldID,_pasportData._id);
+                _test.SendKeys(_fieldSerial,_pasportData._serial);
+                _test.SendKeys(_fieldBirthday,_pasportData._birthday);
+                
+                _test.Click(_buttonNextPassport);
+                
+                //Далее заливаем фото
+                _test.Click(_buttonCreatePhoto);
                 
                 //вставляем его в поле и жмем кнопку "Отправить"
-                _test.SendKeys(_fieldOTPCode,_otpCode);
                 _test.Click(_buttonOtpNewBuyerVendor);
                 
                 //вводим номер карты, дату и жмем на кнопку запроса ОТП
@@ -190,7 +224,7 @@ namespace NasiaAutoTestsApp
                 while (Form1.Driver.FindElements(By.XPath("//section[@class='client-section']//div[@class='overlay white']")).Count>0){}
                 _test.Click(_buttonSaveBuyerVendor);
             }
-            catch (Exception e){}
+            //catch (Exception e){}
         }
 
         public void BuyerStatus()

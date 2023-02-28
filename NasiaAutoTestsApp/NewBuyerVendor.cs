@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace NasiaAutoTestsApp
@@ -19,6 +20,23 @@ namespace NasiaAutoTestsApp
         private string _photo;
         private bool _equal;
         public List<bool> result= new List<bool>();
+        public List<Image> screens = new List<Image>();
+        private Screen screenshot = new Screen();
+        public PasportData _pasportData;
+
+        public class PasportData
+        {
+            public string _serial;
+            public string _id;
+            public string _birthday;
+
+            public PasportData(string serial, string id, string birthday)
+            {
+                _serial = serial;
+                _id = id;
+                _birthday = birthday;
+            }
+        }
 
         public NewBuyerVendor(string login, string password,string buyer,string negativeBuyer, CheckedListBox check,string card,string date,string photo)
         {
@@ -46,15 +64,16 @@ namespace NasiaAutoTestsApp
             //инициализируем данные настройки перед тестом
             InitializationSetup();
             //инициализируем данные самого теста
-            _newBuyer = new VendorTests(_buyer,_card,_date,_photo);
+            _newBuyer = new VendorTests(_buyer,_card,_date,_photo,_pasportData);
             //запускаем
             _newBuyer.NewBuyer();
             
             //проверяем, верен ли результат теста
-            CheckTests("//div[@class='n-form-item-blank']/h1","Покупатель успешно отправлен на модерацию!");
+            CheckTests("//div[@class='requirements__content']/h1","Пользователю предстоит пройти следующие этапы");
             DataBase setStatus = new DataBase("10.20.33.5", "paym_kayden", "dev-base", "Xe3nQx287");
             setStatus.SetStatusBuyer(_buyer,4);
             setStatus.SetLimitBuyer(_buyer,1000000);
+            screens.Add(screenshot.CreateScreenshot("Positive",_newBuyer));
         }
         
         //пустое поле ввода мешает нам закончить тест
@@ -66,6 +85,7 @@ namespace NasiaAutoTestsApp
             
             //проверяем, правильно ли выполнен тест
             CheckTests("//span[@class='error-text']","Пожалуйста заполните это поле!");
+            screens.Add(screenshot.CreateScreenshot("NullPhone",_newBuyer));
             
         }
 
@@ -77,6 +97,7 @@ namespace NasiaAutoTestsApp
             _newBuyer.NewBuyer();
             
             CheckTests("(//span[@class='error-text'])[2]","Пожалуйста заполните это поле!");
+            screens.Add(screenshot.CreateScreenshot("NullOTP",_newBuyer));
         }
 
         //пробуем ввести неверный ОТП-код
@@ -86,6 +107,7 @@ namespace NasiaAutoTestsApp
             _newBuyer = new VendorTests( _buyer,"1234",_card,_date,_photo);
             _newBuyer.NewBuyer();
             CheckTests("//div[@role='alert']","СМС код неверный");
+            screens.Add(screenshot.CreateScreenshot("NegativeOTP",_newBuyer));
         }
 
         //какрта и телефон пользователя не связаны друг с другом
@@ -97,6 +119,7 @@ namespace NasiaAutoTestsApp
             _newBuyer.NewBuyer();
             //MessageBox.Show("");
             CheckTests("//div[@class='Vue-Toastification__toast Vue-Toastification__toast--error top-right']//div[@role='alert']","Телефон клиента не совпадает с телефоном смс информирования карты");
+            screens.Add(screenshot.CreateScreenshot("NegativePhone",_newBuyer));
         }
 
         //номера телефонов гарантов идентичны
@@ -106,6 +129,7 @@ namespace NasiaAutoTestsApp
             _newBuyer = new VendorTests(_buyer,_card,_date,_photo,true);
             _newBuyer.NewBuyer();
             CheckTests("//div[@label='Номер телефона']//span[@class='error-text']","Нельзя вводить одинаковые номера! ");
+            screens.Add(screenshot.CreateScreenshot("Guarants",_newBuyer));
         }
         
         //метод, запускающий тесты в зависимости от того, включен ли данный тест
@@ -115,27 +139,50 @@ namespace NasiaAutoTestsApp
             {
                 StartPositiveTest();
             }
+            else
+            {
+                screens.Add(null);
+            }
             if (_check.GetItemChecked(1))
             {
                 startNullPhoneTests();
+            }
+            else
+            {
+                screens.Add(null);
             }
             if (_check.GetItemChecked(2))
             {
                 StartNullOTPTest();
             }
+            else
+            {
+                screens.Add(null);
+            }
             if (_check.GetItemChecked(3))
             {
                 StartNegativeOTPTest();
+            }
+            else
+            {
+                screens.Add(null);
             }
             if (_check.GetItemChecked(4))
             {
                 StartNegativePhoneWithCard();
             }
+            else
+            {
+                screens.Add(null);
+            }
             if (_check.GetItemChecked(5))
             {
                 StartEqualsGuarantsTests();
             }
-            
+            else
+            {
+                screens.Add(null);
+            }
         }
 
         void CheckTests(string actual, string expected)

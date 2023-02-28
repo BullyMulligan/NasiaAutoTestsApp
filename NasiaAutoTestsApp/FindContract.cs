@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -27,6 +28,8 @@ namespace NasiaAutoTestsApp
         private VendorTests _statusBuyer;
         private bool _avalible;
         private List<string> list;
+        public List<Image> screens = new List<Image>();
+        private Screen screenshot = new Screen();
 
         public FindContract(int contract)
         {
@@ -49,9 +52,8 @@ namespace NasiaAutoTestsApp
             _newProduct.CreateNewProduct(4,10000000);
             _findContract = new VendorTests(_buyer);
             _findContract.FindByContractNumber();
-
-            MessageBox.Show("");
             CheckTests("//span[@class='n-tag__content']","На модерации");
+            screens.Add(screenshot.CreateScreenshot("Positive",_findContract));
         }
 
         public void StartPositiveTestPhone()
@@ -62,6 +64,7 @@ namespace NasiaAutoTestsApp
             var responce = new DataBase("10.20.33.5", "paym_kayden", "dev-base", "Xe3nQx287");
             responce.GetContractsId(_buyer);
             CheckTests(responce);
+            screens.Add(screenshot.CreateScreenshot("ByPhone",_findContract));
         }
         public void StartTestFindStatusModerate()
         {
@@ -71,6 +74,7 @@ namespace NasiaAutoTestsApp
             var responce = new DataBase("10.20.33.5", "paym_kayden", "dev-base", "Xe3nQx287");
             responce.GetContractsIdByStatus(_buyer,0);
             CheckTests(responce);
+            screens.Add(screenshot.CreateScreenshot("Moderate",_findContract));
         }
         public void StartTestFindStatusSuccess()
         {
@@ -80,6 +84,7 @@ namespace NasiaAutoTestsApp
             var responce = new DataBase("10.20.33.5", "paym_kayden", "dev-base", "Xe3nQx287");
             responce.GetContractsIdByStatus(_buyer,1);
             CheckTests(responce);
+            screens.Add(screenshot.CreateScreenshot("Success",_findContract));
         }
         public void StartTestFindStatusExpired()
         {

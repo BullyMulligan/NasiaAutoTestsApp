@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using OpenQA.Selenium;
 
@@ -23,7 +24,8 @@ namespace NasiaAutoTestsApp
         private CheckedListBox _check;
         private VendorTests _statusBuyer;
         private bool _avalible;
-        
+        public List<Image> screens = new List<Image>();
+        private Screen screenshot = new Screen();
         
 
         public BuyerStatus(string login, string password, string buyer, CheckedListBox check,string card,string date,string photo)
@@ -44,6 +46,7 @@ namespace NasiaAutoTestsApp
             ChangeBuyerInDataBase(1);
             _statusBuyer.BuyerStatus();
             CheckTests("//div[@class='client-check__list']//span[@class='n-tag__content']", "Необходимо провести регистрацию");
+            screens.Add(screenshot.CreateScreenshot("Positive",_statusBuyer));
         }
         public void StartVerifyBuyer()
         {
@@ -52,6 +55,7 @@ namespace NasiaAutoTestsApp
             ChangeBuyerInDataBase(4);
             _statusBuyer.BuyerStatus();
             CheckTests("//div[@class='client-check__list']//span[@class='n-tag__content']", "Верифицирован");
+            screens.Add(screenshot.CreateScreenshot("Verify",_statusBuyer));
         }
         public void StartBlockedBuyer()
         {
@@ -60,6 +64,7 @@ namespace NasiaAutoTestsApp
             ChangeBuyerInDataBase(8);
             _statusBuyer.BuyerStatus();
             CheckTests("//div[@class='client-check__list']//span[@class='n-tag__content']", "Отказ в верификации");
+            screens.Add(screenshot.CreateScreenshot("Blocked",_statusBuyer));
         }
         public void StartNotFoundTest()
         {
@@ -68,6 +73,7 @@ namespace NasiaAutoTestsApp
             CheckBuyerInDataBase();
             _statusBuyer.BuyerStatus();
             CheckTests("//div[@class='client-check__list']//span", "Пользователь не найден!");
+            screens.Add(screenshot.CreateScreenshot("NotFound",_statusBuyer));
         }
         public void StartAddGuarantBuyer()
         {
@@ -76,6 +82,7 @@ namespace NasiaAutoTestsApp
             ChangeBuyerInDataBase(12);
             _statusBuyer.BuyerStatus();
             CheckTests("//div[@class='client-check__list']//span[@class='n-tag__content']", "Отказано: Необходимо добавить контактное лицо");
+            screens.Add(screenshot.CreateScreenshot("AddGuarant",_statusBuyer));
         }
         public void StartTests()
         {
@@ -83,21 +90,41 @@ namespace NasiaAutoTestsApp
             {
                 StartPositiveTest();
             }
+            else
+            {
+                screens.Add(null);
+            }
             if (_check.GetItemChecked(1))
             {
                 StartVerifyBuyer();
+            }
+            else
+            {
+                screens.Add(null);
             }
             if (_check.GetItemChecked(2))
             {
                 StartBlockedBuyer();
             }
+            else
+            {
+                screens.Add(null);
+            }
             if (_check.GetItemChecked(3))
             {
                 StartNotFoundTest();
             }
+            else
+            {
+                screens.Add(null);
+            }
             if (_check.GetItemChecked(4))
             {
                 StartAddGuarantBuyer();
+            }
+            else
+            {
+                screens.Add(null);
             }
         }
         
@@ -144,5 +171,6 @@ namespace NasiaAutoTestsApp
                 result.Add(false);
             }
         }
+        
     }
 }

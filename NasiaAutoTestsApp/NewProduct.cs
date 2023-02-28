@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using NUnit.Framework.Constraints;
@@ -25,6 +26,8 @@ namespace NasiaAutoTestsApp
         private CheckedListBox _check;
         private VendorTests _statusBuyer;
         private bool _avalible;
+        public List<Image> screens = new List<Image>();
+        private Screen screenshot = new Screen();
 
         public NewProduct (string login, string password, string buyer, CheckedListBox check,string card,string date,string photo)
         {
@@ -51,43 +54,42 @@ namespace NasiaAutoTestsApp
         {
             CreateNewProduct(4,1000000);
             CheckTests("//div[@class='Vue-Toastification__toast Vue-Toastification__toast--success top-right']//div[@role='alert']","Договор успешно создан и отправлен на модерацию");
-
+            screens.Add(screenshot.CreateScreenshot("Possitive",_newProduct));
         }
         public void StartNotVerifyBuyerTest()
         {
             CreateNewProduct(1,0);
-
             CheckTests("//div[@class='n-alert-body__title']","Необходимо провести регистрацию");
-
+            screens.Add(screenshot.CreateScreenshot("NotVerify",_newProduct));
         }
         public void StartNotHaveLimitTest()
         {
             CreateNewProduct(4,0);
-
             Thread.Sleep(1000);
             CheckTests("//div[@class='Vue-Toastification__container top-right']//div[@role='alert']","Сумма договора превышает лимит покупки!");
+            screens.Add(screenshot.CreateScreenshot("NotHaveLimit",_newProduct));
 
         }
         public void StartModerateProduct()
         {
             CreateNewProduct(4,1000000,1);
-
             Thread.Sleep(1000);
             CheckTests("//div[@class='Vue-Toastification__toast Vue-Toastification__toast--success top-right']//div[@role='alert']","Договор успешно создан и отправлен на модерацию");
+            screens.Add(screenshot.CreateScreenshot("Moderate",_newProduct));
         }
         public void StartExpiredProduct()
         {
             CreateNewProduct(4,1000000,3);
-
             Thread.Sleep(1000);
             CheckTests("//div[@class='Vue-Toastification__toast Vue-Toastification__toast--success top-right']//div[@role='alert']","Договор успешно создан и отправлен на модерацию");
+            screens.Add(screenshot.CreateScreenshot("Expired",_newProduct));
         }
         public void StartCanceledProduct()
         {
             CreateNewProduct(4,1000000,5);
-
             Thread.Sleep(1000);
             CheckTests("//div[@class='Vue-Toastification__toast Vue-Toastification__toast--success top-right']//div[@role='alert']","Договор успешно создан и отправлен на модерацию");
+            screens.Add(screenshot.CreateScreenshot("Canceled",_newProduct));
         }
         
         public void StartTests()
@@ -96,26 +98,49 @@ namespace NasiaAutoTestsApp
             {
                 StartPositiveTest();
             }
+            else
+            {
+                screens.Add(null);
+            }
             if (_check.GetItemChecked(1))
             {
                 StartNotVerifyBuyerTest();
+            }
+            else
+            {
+                screens.Add(null);
             }
             if (_check.GetItemChecked(2))
             {
                 StartNotHaveLimitTest();
             }
+            else
+            {
+                screens.Add(null);
+            }
             if (_check.GetItemChecked(3))
             {
                 StartModerateProduct();
+            }
+            else
+            {
+                screens.Add(null);
             }
             if(_check.GetItemChecked(4))
             {
                 StartExpiredProduct();
             }
-
+            else
+            {
+                screens.Add(null);
+            }
             if (_check.GetItemChecked(5))
             {
                 StartCanceledProduct();
+            }
+            else
+            {
+                screens.Add(null);
             }
         }
         void InitializationSetup()

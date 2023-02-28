@@ -65,6 +65,7 @@ namespace NasiaAutoTestsApp
             _positiveNewBuyer = new NewBuyerVendor(fieldPositiveLoginVendor.Text, fieldPossitivePassVendor.Text,
                 fieldBuyerNumberVendor.Text, fieldNegativeBuyerNumberVendor.Text,
                 checkedListNewBuyerVendor,fieldCardNumberVendor.Text,fieldCardDateVindor.Text,openPhotoVendor.FileName);
+            _positiveNewBuyer._pasportData = new NewBuyerVendor.PasportData(fieldSerial.Text, fieldID.Text, fieldBirthDay.Text);
             _positiveNewBuyer.StartTests();
             ChangeColorChechBox(checkedListNewBuyerVendor, _positiveNewBuyer.result);
 
@@ -177,11 +178,46 @@ namespace NasiaAutoTestsApp
             labelStatusTests.Text = checkStatus;
 
             CheckedListBox checkedListBox = (CheckedListBox)sender;
-            if (_positiveAuth!=null)
+
+            if (checkedListBox==checkedListBoxAuthVendor)
             {
-                pictureBoxAuth.Image = _positiveAuth.screens[checkedListBox.SelectedIndex];
+                if (_positiveAuth!=null)
+                {
+                    pictureBoxAuth.Image = _positiveAuth.screens[checkedListBox.SelectedIndex];
+                }
+            }
+            if (checkedListBox==checkedListNewBuyerVendor)
+            {
+                if (_positiveNewBuyer!=null)
+                {
+                    pictureBoxAuth.Image = _positiveNewBuyer.screens[checkedListBox.SelectedIndex];
+                }
+            }
+            if (checkedListBox==checkedListClientStatus)
+            {
+                if (_positiveBuyerStatus!=null)
+                {
+                    pictureBoxAuth.Image = _positiveBuyerStatus.screens[checkedListBox.SelectedIndex];
+                }
+            }
+            if (checkedListBox==checkedListNewProduct)
+            {
+                if (_newProduct!=null)
+                {
+                    pictureBoxAuth.Image = _newProduct.screens[checkedListBox.SelectedIndex];
+                }
+            }
+
+            if (checkedListBox ==checkedListFindContractVendor)
+            {
+                if (_findContract!=null)
+                {
+                    pictureBoxAuth.Image = _findContract.screens[checkedListBox.SelectedIndex];
+                }
             }
         }
+
+        
 
 
        private void DeleteAllScreenshots()
@@ -206,6 +242,7 @@ namespace NasiaAutoTestsApp
        private void button1_Click(object sender, EventArgs e)
        {
            DeleteAllScreenshots();
+           MessageBox.Show("Все скриншоты удалены");
        }
     }
 }

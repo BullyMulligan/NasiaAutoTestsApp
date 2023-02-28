@@ -20,6 +20,7 @@ namespace NasiaAutoTestsApp
         private VendorTests _setup;
         public List<bool> result= new List<bool>();
         public List<Image> screens = new List<Image>();
+        private Screen screenshot = new Screen();
 
         public Auth(string login, string password, string negativeLogin, string negativePassword,
             CheckedListBox check)
@@ -39,7 +40,7 @@ namespace NasiaAutoTestsApp
             auth.Auth();
 
             CheckTests("//div[@class='page-title']//h2","Новый договор");
-            CreateScreenshot("Positive");
+            screens.Add(screenshot.CreateScreenshot("Positive",auth));
         }
         void StartNegativeLogin()
         {
@@ -47,7 +48,8 @@ namespace NasiaAutoTestsApp
             auth = new VendorTests( _negativeLogin, _password);
             auth.Auth();
             CheckTests("//div[@class='Vue-Toastification__toast Vue-Toastification__toast--error top-right']//div[@role='alert']","Выбранное значение для partner id некорректно.");
-            CreateScreenshot("NegativeLogin");
+            screens.Add(screenshot.CreateScreenshot("NegativeLogin",auth));
+            
         }
         void StartNegativePassword()
         {
@@ -55,7 +57,7 @@ namespace NasiaAutoTestsApp
             auth = new VendorTests( _login, _negativePassword);
             auth.Auth();
             CheckTests("//div[@class='Vue-Toastification__toast Vue-Toastification__toast--error top-right']//div[@role='alert']","Некорректный пароль");
-            CreateScreenshot("NegativePassword");
+            screens.Add(screenshot.CreateScreenshot("NegativePassword",auth));
         }
         void StartNullLogin()
         {
@@ -63,7 +65,7 @@ namespace NasiaAutoTestsApp
             auth = new VendorTests( "", _password);
             auth.Auth();
             CheckTests("//div[@class='n-form-item-feedback__line']","Пожалуйста заполните это поле!");
-            CreateScreenshot("NullLogin");
+            screens.Add(screenshot.CreateScreenshot("NullLogin",auth));
         }
         void StartNullPassword()
         {
@@ -72,7 +74,7 @@ namespace NasiaAutoTestsApp
             auth.Auth();
             Thread.Sleep(200);
             CheckTests("//div[@class='n-form-item-feedback__line']","Пожалуйста заполните это поле!");
-            CreateScreenshot("NullPassword");
+            screens.Add(screenshot.CreateScreenshot("NullPassword",auth));
         }
         //метод, запускающий тесты в зависимости от выбранных чек-листов.
         public void StartTests()
@@ -119,6 +121,7 @@ namespace NasiaAutoTestsApp
             }
         }
 
+        
         void CheckTests(string actual, string expected)
         {
             if (auth.ActualExpected(actual,expected))
@@ -135,29 +138,6 @@ namespace NasiaAutoTestsApp
             _setup = new VendorTests();
             _setup.Setup();
         }
-
-        void CreateScreenshot(string name)
-        {
-            string parentPath = AppDomain.CurrentDomain.BaseDirectory;
-            string folderName = "Auth";
-            string path = Path.Combine(parentPath,folderName);
-            
-            //проверяем наличие папки, если ее не существует, то создаем ее
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            auth.CreateFolder(name,path);
-            byte[] screenshotBytes = Convert.FromBase64String(auth.screenshot.AsBase64EncodedString);
-
-            // Создаем MemoryStream на основе массива байтов
-            MemoryStream ms = new MemoryStream(screenshotBytes);
-
-            // Создаем объект типа System.Drawing.Image на основе MemoryStream
-            Image image = Image.FromStream(ms);
-            screens.Add(image);
-        }
-
-
+        
     }
 }
