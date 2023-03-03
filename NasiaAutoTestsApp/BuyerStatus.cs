@@ -155,7 +155,7 @@ namespace NasiaAutoTestsApp
             if (!_avalible)
             {
                 //запускаем
-                _newBuyer.NewBuyer();
+                _newBuyer.NewBuyer(4,1000000);
             }
             DataBase setStatus = new DataBase("10.20.33.5", "paym_kayden", "dev-base", "Xe3nQx287");
             setStatus.SetStatusBuyer(_buyer,status);

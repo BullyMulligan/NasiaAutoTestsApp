@@ -34,8 +34,23 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
+        <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+          <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
+        </Reference>
+        <Reference Include="AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL">
+          <HintPath>..\packages\AForge.Video.2.2.5\lib\AForge.Video.dll</HintPath>
+        </Reference>
+        <Reference Include="AForge.Video.FFMPEG, Version=2.2.5.0, Culture=neutral, PublicKeyToken=03563089b1be05dd, processorArchitecture=X86">
+          <HintPath>..\packages\AForge.Video.FFMPEG.2.2.5.1-rc\lib\AForge.Video.FFMPEG.dll</HintPath>
+        </Reference>
         <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
           <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+        </Reference>
+        <Reference Include="Emgu.CV, Version=4.6.0.5131, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+          <HintPath>..\packages\Emgu.CV.4.6.0.5131\lib\netstandard2.0\Emgu.CV.dll</HintPath>
+        </Reference>
+        <Reference Include="Emgu.CV.Bitmap, Version=4.6.0.5131, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+          <HintPath>..\packages\Emgu.CV.Bitmap.4.6.0.5131\lib\netstandard2.0\Emgu.CV.Bitmap.dll</HintPath>
         </Reference>
         <Reference Include="Google.Protobuf, Version=3.19.4.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
           <HintPath>..\packages\Google.Protobuf.3.19.4\lib\net45\Google.Protobuf.dll</HintPath>
@@ -49,12 +64,21 @@
         <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
           <HintPath>..\packages\K4os.Hash.xxHash.1.0.6\lib\net46\K4os.Hash.xxHash.dll</HintPath>
         </Reference>
+        <Reference Include="MediaFileProcessor, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\MediaFileProcessor.1.0.2\lib\netstandard2.0\MediaFileProcessor.dll</HintPath>
+        </Reference>
         <Reference Include="mscorlib" />
         <Reference Include="MySql.Data, Version=8.0.31.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
           <HintPath>..\packages\MySql.Data.8.0.31\lib\net48\MySql.Data.dll</HintPath>
         </Reference>
         <Reference Include="nunit.framework, Version=3.13.3.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
           <HintPath>..\packages\NUnit.3.13.3\lib\net45\nunit.framework.dll</HintPath>
+        </Reference>
+        <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+          <HintPath>..\packages\OpenTK.1.1.2225.0\lib\net20\OpenTK.dll</HintPath>
+        </Reference>
+        <Reference Include="OpenTK.GLControl, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+          <HintPath>..\packages\OpenTK.GLControl.1.1.2225.0\lib\net20\OpenTK.GLControl.dll</HintPath>
         </Reference>
         <Reference Include="SeleniumExtras.WaitHelpers, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
           <HintPath>..\packages\DotNetSeleniumExtras.WaitHelpers.3.11.0\lib\net45\SeleniumExtras.WaitHelpers.dll</HintPath>
@@ -63,9 +87,16 @@
         <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
           <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
         </Reference>
+        <Reference Include="System.ComponentModel.Composition" />
         <Reference Include="System.Configuration" />
         <Reference Include="System.Configuration.Install" />
         <Reference Include="System.Core" />
+        <Reference Include="System.Drawing.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+          <HintPath>..\packages\System.Drawing.Common.6.0.0\lib\net461\System.Drawing.Common.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Drawing.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <HintPath>..\packages\System.Drawing.Primitives.4.3.0\lib\net45\System.Drawing.Primitives.dll</HintPath>
+        </Reference>
         <Reference Include="System.Management" />
         <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
           <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
@@ -74,8 +105,14 @@
         <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
           <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
         </Reference>
+        <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <HintPath>..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+        </Reference>
         <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
           <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
         </Reference>
         <Reference Include="System.Transactions" />
         <Reference Include="System.Xml.Linq" />
@@ -93,6 +130,9 @@
         <Reference Include="WebDriver.Support, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
           <HintPath>..\packages\Selenium.Support.4.7.0\lib\net48\WebDriver.Support.dll</HintPath>
         </Reference>
+        <Reference Include="ZedGraph, Version=5.1.5.28844, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+          <HintPath>..\packages\ZedGraph.5.1.5\lib\ZedGraph.dll</HintPath>
+        </Reference>
         <Reference Include="ZstdNet, Version=1.4.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
           <HintPath>..\packages\MySql.Data.8.0.31\lib\net48\ZstdNet.dll</HintPath>
         </Reference>
@@ -109,10 +149,11 @@
             <DependentUpon>Form1.cs</DependentUpon>
         </Compile>
         <Compile Include="Log.cs" />
+        <Compile Include="Mjpeg.cs" />
         <Compile Include="NewBuyerVendor.cs" />
         <Compile Include="NewProduct.cs" />
         <Compile Include="Overloads.cs" />
-        <Compile Include="PageElements.cs" />
+        <Compile Include="PagesElements.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Screen.cs" />
@@ -129,6 +170,7 @@
             <AutoGen>True</AutoGen>
             <DependentUpon>Resources.resx</DependentUpon>
         </Compile>
+        <None Include="OpenTK.dll.config" />
         <None Include="packages.config" />
         <None Include="Properties\Settings.settings">
             <Generator>SettingsSingleFileGenerator</Generator>

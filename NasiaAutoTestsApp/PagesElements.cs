@@ -1,4 +1,3 @@
-using System.Threading;
 using OpenQA.Selenium;
 
 namespace NasiaAutoTestsApp
@@ -21,19 +20,26 @@ namespace NasiaAutoTestsApp
         protected readonly By _buttonCheckCardVendor =
             By.XPath("//section[@class='client-section block-card'][1]//button/span[text()='Получить СМС']");//кнопка, отправляющая данные карты на сервер
 
+        protected readonly By _buttonWebCam = By.XPath("//button[@class='buttons__take-picture']");
+        protected readonly By _buttonWebCamNext = By.XPath("//a[text()='Продолжить']");
         protected readonly By _fieldOtp = By.XPath("//input[@class='otp-input']");
         protected readonly By _fieldOtpCardCode = By.XPath("//div[@class='row-wrap client__card-sms']//input[@class='n-input__input-el']");//поле ввода ОТП кода для проверки карты
         protected readonly By _buttonCheckCardOTPVendor = By.XPath("//section[@class='client-section block-card'][1]//button/span[text()='Подтвердить']");//кнопка, отправляющая данные карты на сервер
-        protected readonly By _fieldSerial = By.XPath("//input[@name='passportSeria']");
-        protected readonly By _fieldID = By.XPath("//input[@name='passportNumber']");
-        protected readonly By _fieldBirthday = By.XPath("//input[@name='birthday']");
+        protected readonly By _fieldSerial = By.XPath("//input[@placeholder='AA']");
+        protected readonly By _fieldID = By.XPath("//input[@placeholder='0000000']");
+        protected readonly By _fieldBirthday = By.XPath("//input[@placeholder='DD-MM-YYYY']");
         protected readonly By _buttonNextPassport = By.XPath("//button");
         protected readonly By _buttonCreatePhoto = By.XPath("//button");
-        protected readonly By _buttonSaveBuyerVendor = By.XPath("//div[@class='client__guarants-save']//button//span[text()='Сохранить']");//добавить покупателя
-        protected readonly By _fieldName1 = By.Name("name_1");//поле имя доверителя 1
-        protected readonly By _fieldName2 = By.Name("name_2");//поле имя доверителя 2
-        protected readonly By _fieldGarantNumber1 = By.Name("guarantPhone-1");//поле ввода телефона доверителя 1
-        protected readonly By _fieldGarantNumber2 = By.Name("guarantPhone-2");//поле ввода телефона доверителя 2
+        protected readonly By _buttonSaveGuarants = By.XPath("//button[@class='btn-primary']");//добавить гарантов
+        protected readonly By _buttonBoostCredit = By.XPath("//button[@class='btn-primary']");//кнопка "увеличить кредит"
+        protected readonly By _fieldCard = By.XPath("//input[@name='cardNumber']");
+        protected readonly By _fieldCardDate = By.XPath("//input[@name='cardExp']");
+        protected readonly By _buttonAddCardNext = By.XPath("//button[@class='btn-primary']");
+        protected readonly By _fieldName1 = By.XPath("//div[@name='name_1']/input");//поле имя доверителя 1
+        protected readonly By _fieldName2 = By.XPath("//div[@name='name_2']/input");//поле имя доверителя 2
+        protected readonly By _fieldGarantNumber1 = By.XPath("//div[@name='guarantPhone-1']/input");//поле ввода телефона доверителя 1
+        protected readonly By _fieldGarantNumber2 = By.XPath("//div[@name='guarantPhone-2']/input");//поле ввода телефона доверителя 2
+        protected readonly By _buttonUpdateStatus = By.XPath("//button[@class='clock__btn btn-primary']");//кнопка "обновить статус"
 
 
         protected readonly By _fieldVerifyBuyerVendor = By.XPath("//input[@class='n-input__input-el']");
@@ -136,7 +142,6 @@ namespace NasiaAutoTestsApp
         protected readonly By _rowNewBuyer = By.XPath("//div[@id = 'newBuyer']//div[@class= 'form-row']");
         protected readonly By _btnSendSms = By.XPath("//button[@class='btn btn-orange']");
         protected readonly By _fieldCardBuyer = By.Id("inputCardNumber");
-        protected readonly By _fieldCardDate = By.Id("inputCardExp");
         protected readonly By _fieldSmsCheck = By.Id("sms-code-input");
         protected readonly By _attachPassportSelfie = By.Id("passport_selfie");
         protected readonly By _attachPassportFirstPage = By.Id("passport_first_page");

@@ -82,3 +82,35 @@ C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp
 C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\obj\Debug\NasiaAutoTestsApp.csproj.CopyComplete
 C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\obj\Debug\NasiaAutoTestsApp.exe
 C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp — копия\NasiaAutoTestsApp\obj\Debug\NasiaAutoTestsApp.pdb
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\Emgu.CV.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\Emgu.CV.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\Emgu.CV.Bitmap.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\System.Drawing.Common.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\Emgu.CV.Bitmap.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\System.Drawing.Common.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\AForge.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\AForge.Video.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\AForge.Video.FFMPEG.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\AForge.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\AForge.Video.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\AForge.Video.FFMPEG.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\MediaFileProcessor.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\OpenTK.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\OpenTK.GLControl.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\ZedGraph.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\OpenTK.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\OpenTK.GLControl.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\ZedGraph.xml
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\de\ZedGraph.resources.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\es\ZedGraph.resources.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\fr\ZedGraph.resources.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\hu\ZedGraph.resources.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\it\ZedGraph.resources.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\ja\ZedGraph.resources.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\pt\ZedGraph.resources.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\ru\ZedGraph.resources.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\sk\ZedGraph.resources.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\sv\ZedGraph.resources.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\tr\ZedGraph.resources.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\zh-cn\ZedGraph.resources.dll
+C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\bin\Debug\zh-tw\ZedGraph.resources.dll

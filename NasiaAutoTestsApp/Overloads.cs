@@ -1,13 +1,6 @@
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.Net;
 using System.Threading;
 using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.Extensions;
-using Cookie = OpenQA.Selenium.Cookie;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 
 
 namespace NasiaAutoTestsApp

@@ -66,13 +66,10 @@ namespace NasiaAutoTestsApp
             //инициализируем данные самого теста
             _newBuyer = new VendorTests(_buyer,_card,_date,_photo,_pasportData);
             //запускаем
-            _newBuyer.NewBuyer();
+            _newBuyer.NewBuyer(4,1000000);
             
             //проверяем, верен ли результат теста
-            CheckTests("//div[@class='requirements__content']/h1","Пользователю предстоит пройти следующие этапы");
-            DataBase setStatus = new DataBase("10.20.33.5", "paym_kayden", "dev-base", "Xe3nQx287");
-            setStatus.SetStatusBuyer(_buyer,4);
-            setStatus.SetLimitBuyer(_buyer,1000000);
+            CheckTests("//h1[@class='success__title title']","Поздравляем! Ваш лимит рассрочки: 1000000.00 cум");
             screens.Add(screenshot.CreateScreenshot("Positive",_newBuyer));
         }
         
@@ -81,10 +78,10 @@ namespace NasiaAutoTestsApp
         {
             InitializationSetup();
             _newBuyer = new VendorTests( _login, _password, "",_card,_date,_photo);
-            _newBuyer.NewBuyer();
+            _newBuyer.NewBuyer(4,1000000);
             
             //проверяем, правильно ли выполнен тест
-            CheckTests("//span[@class='error-text']","Пожалуйста заполните это поле!");
+            CheckTests("//h2[@class='title']","Добро пожаловать");
             screens.Add(screenshot.CreateScreenshot("NullPhone",_newBuyer));
             
         }
@@ -94,9 +91,9 @@ namespace NasiaAutoTestsApp
         {
             InitializationSetup();
             _newBuyer = new VendorTests( _buyer,"",_card,_date,_photo);
-            _newBuyer.NewBuyer();
+            _newBuyer.NewBuyer(4,1000000);
             
-            CheckTests("(//span[@class='error-text'])[2]","Пожалуйста заполните это поле!");
+            CheckTests("(//h2[@class='title'])","Введите код из СМС");
             screens.Add(screenshot.CreateScreenshot("NullOTP",_newBuyer));
         }
 
@@ -105,8 +102,8 @@ namespace NasiaAutoTestsApp
         {
             InitializationSetup();
             _newBuyer = new VendorTests( _buyer,"1234",_card,_date,_photo);
-            _newBuyer.NewBuyer();
-            CheckTests("//div[@role='alert']","СМС код неверный");
+            _newBuyer.NewBuyer(4,1000000);
+            CheckTests("//div[@class='Vue-Toastification__toast Vue-Toastification__toast--error top-right']//div[@role='alert']","СМС код неверный");
             screens.Add(screenshot.CreateScreenshot("NegativeOTP",_newBuyer));
         }
 
@@ -114,9 +111,9 @@ namespace NasiaAutoTestsApp
         void StartNegativePhoneWithCard()
         {
             InitializationSetup();
-            _newBuyer = new VendorTests(_negativeBuyer,_card,_date,_photo);
+            _newBuyer = new VendorTests(_negativeBuyer,_card,_date,_photo,_pasportData);
             
-            _newBuyer.NewBuyer();
+            _newBuyer.NewBuyer(4,1000000);
             //MessageBox.Show("");
             CheckTests("//div[@class='Vue-Toastification__toast Vue-Toastification__toast--error top-right']//div[@role='alert']","Телефон клиента не совпадает с телефоном смс информирования карты");
             screens.Add(screenshot.CreateScreenshot("NegativePhone",_newBuyer));
@@ -127,7 +124,7 @@ namespace NasiaAutoTestsApp
         {
             InitializationSetup();
             _newBuyer = new VendorTests(_buyer,_card,_date,_photo,true);
-            _newBuyer.NewBuyer();
+            _newBuyer.NewBuyer(4,1000000);
             CheckTests("//div[@label='Номер телефона']//span[@class='error-text']","Нельзя вводить одинаковые номера! ");
             screens.Add(screenshot.CreateScreenshot("Guarants",_newBuyer));
         }

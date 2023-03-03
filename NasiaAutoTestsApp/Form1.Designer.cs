@@ -50,6 +50,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.checkedListBoxAuthVendor = new System.Windows.Forms.CheckedListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.fieldBirthDay = new System.Windows.Forms.TextBox();
+            this.fieldID = new System.Windows.Forms.TextBox();
+            this.fieldSerial = new System.Windows.Forms.TextBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.fieldCardDateVindor = new System.Windows.Forms.TextBox();
             this.fieldNegativeCardDateVendor = new System.Windows.Forms.TextBox();
@@ -73,9 +76,6 @@
             this.checkedListFindContractVendor = new System.Windows.Forms.CheckedListBox();
             this.tabBuyer = new System.Windows.Forms.TabPage();
             this.openPhotoVendor = new System.Windows.Forms.OpenFileDialog();
-            this.fieldSerial = new System.Windows.Forms.TextBox();
-            this.fieldID = new System.Windows.Forms.TextBox();
-            this.fieldBirthDay = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabVendor.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -99,7 +99,7 @@
             this.tabControl1.Location = new System.Drawing.Point(9, 10);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1186, 806);
+            this.tabControl1.Size = new System.Drawing.Size(1202, 870);
             this.tabControl1.TabIndex = 0;
             // 
             // tabVendor
@@ -119,7 +119,7 @@
             this.tabVendor.Location = new System.Drawing.Point(4, 25);
             this.tabVendor.Name = "tabVendor";
             this.tabVendor.Padding = new System.Windows.Forms.Padding(3);
-            this.tabVendor.Size = new System.Drawing.Size(1178, 777);
+            this.tabVendor.Size = new System.Drawing.Size(1194, 841);
             this.tabVendor.TabIndex = 0;
             this.tabVendor.Text = "Vendor";
             this.tabVendor.UseVisualStyleBackColor = true;
@@ -127,7 +127,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(719, 12);
+            this.button1.Location = new System.Drawing.Point(735, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(148, 29);
             this.button1.TabIndex = 12;
@@ -139,7 +139,7 @@
             // 
             this.labelStatusTests.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelStatusTests.BackColor = System.Drawing.SystemColors.Info;
-            this.labelStatusTests.Location = new System.Drawing.Point(768, 706);
+            this.labelStatusTests.Location = new System.Drawing.Point(784, 770);
             this.labelStatusTests.Name = "labelStatusTests";
             this.labelStatusTests.Size = new System.Drawing.Size(249, 59);
             this.labelStatusTests.TabIndex = 11;
@@ -147,7 +147,7 @@
             // buttonOpenPhotoVendor
             // 
             this.buttonOpenPhotoVendor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOpenPhotoVendor.Location = new System.Drawing.Point(606, 12);
+            this.buttonOpenPhotoVendor.Location = new System.Drawing.Point(622, 12);
             this.buttonOpenPhotoVendor.Name = "buttonOpenPhotoVendor";
             this.buttonOpenPhotoVendor.Size = new System.Drawing.Size(93, 29);
             this.buttonOpenPhotoVendor.TabIndex = 10;
@@ -176,7 +176,7 @@
             // checkNegativeVendor
             // 
             this.checkNegativeVendor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkNegativeVendor.Location = new System.Drawing.Point(1009, 15);
+            this.checkNegativeVendor.Location = new System.Drawing.Point(1025, 15);
             this.checkNegativeVendor.Name = "checkNegativeVendor";
             this.checkNegativeVendor.Size = new System.Drawing.Size(131, 25);
             this.checkNegativeVendor.TabIndex = 7;
@@ -208,7 +208,7 @@
             this.fieldPositiveLoginVendor.Name = "fieldPositiveLoginVendor";
             this.fieldPositiveLoginVendor.Size = new System.Drawing.Size(62, 22);
             this.fieldPositiveLoginVendor.TabIndex = 3;
-            this.fieldPositiveLoginVendor.Text = "216449";
+            this.fieldPositiveLoginVendor.Text = "1";
             // 
             // label2
             // 
@@ -223,7 +223,7 @@
             // buttonStartTestsVendor
             // 
             this.buttonStartTestsVendor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStartTestsVendor.Location = new System.Drawing.Point(1055, 732);
+            this.buttonStartTestsVendor.Location = new System.Drawing.Point(1071, 796);
             this.buttonStartTestsVendor.Name = "buttonStartTestsVendor";
             this.buttonStartTestsVendor.Size = new System.Drawing.Size(98, 30);
             this.buttonStartTestsVendor.TabIndex = 1;
@@ -243,7 +243,7 @@
             this.tabControl2.Location = new System.Drawing.Point(25, 51);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1133, 648);
+            this.tabControl2.Size = new System.Drawing.Size(1149, 712);
             this.tabControl2.TabIndex = 0;
             // 
             // tabPage1
@@ -256,7 +256,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1127, 627);
+            this.tabPage1.Size = new System.Drawing.Size(1143, 691);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Авторизация";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -266,7 +266,7 @@
             this.pictureBoxAuth.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxAuth.Location = new System.Drawing.Point(422, 18);
             this.pictureBoxAuth.Name = "pictureBoxAuth";
-            this.pictureBoxAuth.Size = new System.Drawing.Size(664, 477);
+            this.pictureBoxAuth.Size = new System.Drawing.Size(680, 541);
             this.pictureBoxAuth.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxAuth.TabIndex = 7;
             this.pictureBoxAuth.TabStop = false;
@@ -274,7 +274,7 @@
             // fieldNegativePasswordVendor
             // 
             this.fieldNegativePasswordVendor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.fieldNegativePasswordVendor.Location = new System.Drawing.Point(151, 570);
+            this.fieldNegativePasswordVendor.Location = new System.Drawing.Point(151, 634);
             this.fieldNegativePasswordVendor.Name = "fieldNegativePasswordVendor";
             this.fieldNegativePasswordVendor.Size = new System.Drawing.Size(67, 22);
             this.fieldNegativePasswordVendor.TabIndex = 3;
@@ -283,7 +283,7 @@
             // fieldNegativeLoginVendor
             // 
             this.fieldNegativeLoginVendor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.fieldNegativeLoginVendor.Location = new System.Drawing.Point(150, 538);
+            this.fieldNegativeLoginVendor.Location = new System.Drawing.Point(150, 602);
             this.fieldNegativeLoginVendor.Name = "fieldNegativeLoginVendor";
             this.fieldNegativeLoginVendor.Size = new System.Drawing.Size(67, 22);
             this.fieldNegativeLoginVendor.TabIndex = 2;
@@ -293,7 +293,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.BackColor = System.Drawing.SystemColors.Info;
-            this.label1.Location = new System.Drawing.Point(23, 522);
+            this.label1.Location = new System.Drawing.Point(23, 586);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(211, 85);
             this.label1.TabIndex = 1;
@@ -328,10 +328,34 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1125, 619);
+            this.tabPage2.Size = new System.Drawing.Size(1141, 683);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Новый покупатель";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // fieldBirthDay
+            // 
+            this.fieldBirthDay.Location = new System.Drawing.Point(145, 344);
+            this.fieldBirthDay.Name = "fieldBirthDay";
+            this.fieldBirthDay.Size = new System.Drawing.Size(97, 22);
+            this.fieldBirthDay.TabIndex = 15;
+            this.fieldBirthDay.Text = "09-02-1995";
+            // 
+            // fieldID
+            // 
+            this.fieldID.Location = new System.Drawing.Point(245, 312);
+            this.fieldID.Name = "fieldID";
+            this.fieldID.Size = new System.Drawing.Size(97, 22);
+            this.fieldID.TabIndex = 14;
+            this.fieldID.Text = "3869823";
+            // 
+            // fieldSerial
+            // 
+            this.fieldSerial.Location = new System.Drawing.Point(145, 312);
+            this.fieldSerial.Name = "fieldSerial";
+            this.fieldSerial.Size = new System.Drawing.Size(43, 22);
+            this.fieldSerial.TabIndex = 13;
+            this.fieldSerial.Text = "AA";
             // 
             // pictureBox3
             // 
@@ -363,7 +387,7 @@
             this.fieldNegativeCardNumberVendor.Name = "fieldNegativeCardNumberVendor";
             this.fieldNegativeCardNumberVendor.Size = new System.Drawing.Size(142, 22);
             this.fieldNegativeCardNumberVendor.TabIndex = 9;
-            this.fieldNegativeCardNumberVendor.Text = "8600492920928161";
+            this.fieldNegativeCardNumberVendor.Text = "8600492900369733";
             // 
             // fieldCardNumberVendor
             // 
@@ -371,7 +395,7 @@
             this.fieldCardNumberVendor.Name = "fieldCardNumberVendor";
             this.fieldCardNumberVendor.Size = new System.Drawing.Size(143, 22);
             this.fieldCardNumberVendor.TabIndex = 8;
-            this.fieldCardNumberVendor.Text = "8600492900369733";
+            this.fieldCardNumberVendor.Text = "8600492920928161";
             // 
             // fieldNegativeBuyerNumberVendor
             // 
@@ -379,7 +403,7 @@
             this.fieldNegativeBuyerNumberVendor.Name = "fieldNegativeBuyerNumberVendor";
             this.fieldNegativeBuyerNumberVendor.Size = new System.Drawing.Size(152, 22);
             this.fieldNegativeBuyerNumberVendor.TabIndex = 7;
-            this.fieldNegativeBuyerNumberVendor.Text = "909831021";
+            this.fieldNegativeBuyerNumberVendor.Text = "909696097";
             // 
             // fieldBuyerNumberVendor
             // 
@@ -387,7 +411,7 @@
             this.fieldBuyerNumberVendor.Name = "fieldBuyerNumberVendor";
             this.fieldBuyerNumberVendor.Size = new System.Drawing.Size(153, 22);
             this.fieldBuyerNumberVendor.TabIndex = 6;
-            this.fieldBuyerNumberVendor.Text = "909696097";
+            this.fieldBuyerNumberVendor.Text = "909831021";
             // 
             // label
             // 
@@ -408,6 +432,7 @@
             this.checkedListNewBuyerVendor.Size = new System.Drawing.Size(216, 123);
             this.checkedListNewBuyerVendor.TabIndex = 4;
             this.checkedListNewBuyerVendor.Click += new System.EventHandler(this.checkedListFindContractVendor_SelectedIndexChanged);
+            this.checkedListNewBuyerVendor.SelectedIndexChanged += new System.EventHandler(this.checkedListFindContractVendor_SelectedIndexChanged);
             // 
             // tabPage3
             // 
@@ -418,7 +443,7 @@
             this.tabPage3.Controls.Add(this.checkedListClientStatus);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1123, 611);
+            this.tabPage3.Size = new System.Drawing.Size(1139, 675);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Статус клиента";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -434,7 +459,7 @@
             // textBox1
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox1.Location = new System.Drawing.Point(149, 556);
+            this.textBox1.Location = new System.Drawing.Point(149, 620);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(67, 22);
             this.textBox1.TabIndex = 7;
@@ -443,7 +468,7 @@
             // textBox2
             // 
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox2.Location = new System.Drawing.Point(148, 524);
+            this.textBox2.Location = new System.Drawing.Point(148, 588);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(67, 22);
             this.textBox2.TabIndex = 6;
@@ -453,7 +478,7 @@
             // 
             this.labelClientVendor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelClientVendor.BackColor = System.Drawing.SystemColors.Info;
-            this.labelClientVendor.Location = new System.Drawing.Point(21, 508);
+            this.labelClientVendor.Location = new System.Drawing.Point(21, 572);
             this.labelClientVendor.Name = "labelClientVendor";
             this.labelClientVendor.Size = new System.Drawing.Size(211, 85);
             this.labelClientVendor.TabIndex = 5;
@@ -477,7 +502,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1123, 611);
+            this.tabPage4.Size = new System.Drawing.Size(1139, 675);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Новый товар";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -507,7 +532,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 25);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1123, 611);
+            this.tabPage5.Size = new System.Drawing.Size(1139, 675);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Поиск контракта";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -535,7 +560,7 @@
             this.tabBuyer.Location = new System.Drawing.Point(4, 25);
             this.tabBuyer.Name = "tabBuyer";
             this.tabBuyer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabBuyer.Size = new System.Drawing.Size(1176, 769);
+            this.tabBuyer.Size = new System.Drawing.Size(1192, 833);
             this.tabBuyer.TabIndex = 1;
             this.tabBuyer.Text = "Buyer";
             this.tabBuyer.UseVisualStyleBackColor = true;
@@ -545,35 +570,11 @@
             this.openPhotoVendor.FileName = "openPhotoVendor";
             this.openPhotoVendor.Filter = "JPG|*.jpg|PNG|*.png|BMP|*.bmp";
             // 
-            // fieldSerial
-            // 
-            this.fieldSerial.Location = new System.Drawing.Point(145, 312);
-            this.fieldSerial.Name = "fieldSerial";
-            this.fieldSerial.Size = new System.Drawing.Size(43, 22);
-            this.fieldSerial.TabIndex = 13;
-            this.fieldSerial.Text = "AD";
-            // 
-            // fieldID
-            // 
-            this.fieldID.Location = new System.Drawing.Point(245, 312);
-            this.fieldID.Name = "fieldID";
-            this.fieldID.Size = new System.Drawing.Size(97, 22);
-            this.fieldID.TabIndex = 14;
-            this.fieldID.Text = "1396634";
-            // 
-            // fieldBirthDay
-            // 
-            this.fieldBirthDay.Location = new System.Drawing.Point(145, 344);
-            this.fieldBirthDay.Name = "fieldBirthDay";
-            this.fieldBirthDay.Size = new System.Drawing.Size(97, 22);
-            this.fieldBirthDay.TabIndex = 15;
-            this.fieldBirthDay.Text = "25-05-1995";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1207, 821);
+            this.ClientSize = new System.Drawing.Size(1223, 885);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";

@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Management.Instrumentation;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json;
 using OpenQA.Selenium;
 
 namespace NasiaAutoTestsApp
@@ -98,6 +92,8 @@ namespace NasiaAutoTestsApp
             if (openPhotoVendor.ShowDialog() == DialogResult.OK)
             {
                 buttonStartTestsVendor.Visible = true;
+                Mjpeg mjpeg = new Mjpeg();
+                mjpeg.JpgToMpeg(openPhotoVendor.FileName);
             }
             else
             {
@@ -216,10 +212,7 @@ namespace NasiaAutoTestsApp
                 }
             }
         }
-
         
-
-
        private void DeleteAllScreenshots()
        {
            string targetDirectory = AppDomain.CurrentDomain.BaseDirectory;
@@ -243,6 +236,13 @@ namespace NasiaAutoTestsApp
        {
            DeleteAllScreenshots();
            MessageBox.Show("Все скриншоты удалены");
+       }
+
+       private void button2_Click(object sender, EventArgs e)
+       {
+           VendorTests test = new VendorTests();
+           test.TestWebcam();
+           
        }
     }
 }

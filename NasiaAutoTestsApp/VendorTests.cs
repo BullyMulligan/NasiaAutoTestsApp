@@ -2,10 +2,11 @@ using System;
 using System.Threading;
 using System.Windows.Forms;
 using OpenQA.Selenium;
-using OpenQA.Selenium.DevTools.V108.IndexedDB;
 using OpenQA.Selenium.Support.UI;
 using System.IO;
-using Keys = System.Windows.Forms.Keys;
+using Emgu.CV;
+using Emgu.CV.Structure;
+using OpenQA.Selenium.Chrome;
 
 
 namespace NasiaAutoTestsApp
@@ -94,7 +95,13 @@ namespace NasiaAutoTestsApp
         //метод преднастройки тестов. Открывает браузер, настраивает таймспаны
         public void Setup()
         {
-            Form1.Driver = new OpenQA.Selenium.Chrome.ChromeDriver();//открываем Хром
+            //настраиваем фейковую камеру
+            ChromeOptions options = new ChromeOptions();
+            options.AddArgument("--use-fake-device-for-media-stream");
+            options.AddArgument("--use-fake-ui-for-media-stream");
+            options.AddArgument($"--use-file-for-fake-video-capture={AppDomain.CurrentDomain.BaseDirectory}/stream.mjpeg");
+            
+            Form1.Driver = new OpenQA.Selenium.Chrome.ChromeDriver(options);//открываем Хром
             Form1.Driver.Navigate().GoToUrl($"https://{_instance}.uzumnasiya.uz/ru");//вводим адрес сайта
             Form1.Driver.Manage().Window.Maximize();//открыть в полном окне
             Form1.Driver.Manage().Timeouts().ImplicitWait=TimeSpan.FromSeconds(10);
@@ -111,15 +118,14 @@ namespace NasiaAutoTestsApp
         }
 
         //метод создания нового пользователя
-        public void NewBuyer()
+        public void NewBuyer(int status,int limit)
         {
-            //try
+            try
             {
                 WebDriverWait wait = new WebDriverWait(Form1.Driver, TimeSpan.FromSeconds(10));
                 //удаляем пользователя из базы
                 _responce = new DataBase("10.20.33.5", "paym_tera", "dev-base", "Xe3nQx287");
                 _responce.DeleteUser(_buyer);
-                
                 //нажимаем на кнопку сайдабара(3), вводим номер покупателя и жмем кнопку "отправить ОТП-код"
                 _test.Click(_listButtonsSideBar,3);
                 _test.Click(_buttonNextStep);
@@ -145,12 +151,14 @@ namespace NasiaAutoTestsApp
                     Thread.Sleep(500);
                     _responce.GetOTP();
                     _otpCode = _responce.code;
+                    Thread.Sleep(1000);
                 }
                 //вводим цифры отп-кода в раздельные поля
                 for (int i = 0; i < _otpCode.Length; i++)
                 {
                     Form1.Driver.FindElements(_fieldOtp)[i].SendKeys(_otpCode[i].ToString());
                 }
+                if(Form1.Driver.FindElements(By.XPath("//div[@class='Vue-Toastification__container top-right']//div[@role='alert']")).Count>0){return;}
                 
                 //заполняем паспортные данные
                 _test.SendKeys(_fieldID,_pasportData._id);
@@ -159,47 +167,42 @@ namespace NasiaAutoTestsApp
                 
                 _test.Click(_buttonNextPassport);
                 
-                //Далее заливаем фото
+                //Далее фоткаемся на фейковую вебкамеру
                 _test.Click(_buttonCreatePhoto);
+                _test.Click(_buttonWebCam);
+                _test.Click(_buttonWebCamNext);
                 
-                //вставляем его в поле и жмем кнопку "Отправить"
-                _test.Click(_buttonOtpNewBuyerVendor);
+                //ждем, пока не появятся поздравления об одобрении кредита и жмем "увеличить кредит"
+                while (Form1.Driver.FindElements(By.XPath("//h1")).Count!=1) {}
+                Thread.Sleep(1000);
+                _test.Click(_buttonBoostCredit);
                 
-                //вводим номер карты, дату и жмем на кнопку запроса ОТП
-                _test.SendKeys(_fieldCardNumberBuyerVendor,_card);
-                _test.SendKeys(_fieldCardDataBuyerVendor,_date);
-                //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(_buttonCheckCardVendor));
-                _test.Click(_buttonCheckCardVendor);
-
-                if (Form1.Driver.FindElements(_messageErrorCardNotPhone).Count==0)
+                //заполняем карту и жмем "продолжить"
+                
+                _test.SendKeys(_fieldCard,_card);
+                _test.SendKeys(_fieldCardDate,_date);
+                _test.Click(_checkboxAgree);
+                _test.Click(_buttonAddCardNext);
+                
+                if(Form1.Driver.FindElements(By.XPath("//div[@class='Vue-Toastification__container top-right']//div[@role='alert']")).Count>0){return;}
+                
+                //*****************************************************************************************//
+                
+                
+                //берем отп из базы, он должен отличаться от предыдущего кода
+                while (_responce.code==_otpCode)
                 {
-                    //берем отп из базы, он должен отличаться от предыдущего кода
-                    while (_responce.code==_otpCode)
-                    {
-                        _responce.request = "select code from otp_enter_code_attempts WHERE phone = 998"+_buyer;
-                        Thread.Sleep(500);
-                        _responce.GetOTP();
-                    }
-                }
-                else
-                {
-                    return;
+                    _responce.request = "select code from otp_enter_code_attempts WHERE phone = 998"+_buyer;
+                    Thread.Sleep(500);
+                    _responce.GetOTP();
                 }
                 _otpCode = _responce.code;
 
-                
-                //заполняем поле отп кодом и жмем кнопку "отправить"
-                _test.SendKeys(_fieldOtpCardCode,_otpCode);
-                _test.Click(_buttonCheckCardOTPVendor);
-
-                //далее следует блок с заливкой фотографий
-                for (int i = 0; i < 3; i++)
+                //вводим цифры отп-кода в раздельные поля
+                for (int i = 0; i < _otpCode.Length; i++)
                 {
-                    _test.SendKeys(_fieldPhotoVendor,i, _photo);
+                    Form1.Driver.FindElements(_fieldOtp)[i].SendKeys(_otpCode[i].ToString());
                 }
-                //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(_buttonSavePhotosVendor));
-                Thread.Sleep(1000);
-                _test.Click(_buttonSavePhotosVendor);
                 
                 //заполняем поля с доверителями
                 _test.SendKeys(_fieldName1,"Брэд Питт");
@@ -221,10 +224,18 @@ namespace NasiaAutoTestsApp
                     _test.SendKeys(_fieldGarantNumber1,"9");
                     _test.SendKeys(_fieldGarantNumber2,"9");
                 }
-                while (Form1.Driver.FindElements(By.XPath("//section[@class='client-section']//div[@class='overlay white']")).Count>0){}
-                _test.Click(_buttonSaveBuyerVendor);
+                _test.Click(_buttonSaveGuarants);
+
+                //ждем, пока не появится сообщении об обработке заявки
+                while (Form1.Driver.FindElements(By.XPath("//h3[@class='clock__title title']")).Count!=1){}
+                
+                //меняем статус клиента, задаем лимит и жмем кнопку "обновить статус"
+                DataBase setStatus = new DataBase("10.20.33.5", "paym_tera", "dev-base", "Xe3nQx287");
+                setStatus.SetStatusBuyer(_buyer,status);
+                setStatus.SetLimitBuyer(_buyer,limit);
+                _test.Click(_buttonUpdateStatus);
             }
-            //catch (Exception e){}
+            catch (Exception e){}
         }
 
         public void BuyerStatus()
@@ -322,6 +333,43 @@ namespace NasiaAutoTestsApp
             screenshot = ((ITakesScreenshot)Form1.Driver).GetScreenshot();
             string now = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
             screenshot.SaveAsFile($"{path}\\{now}.jpeg");
+        }
+
+        private void FakeWebcam()
+        {
+            var videoCapture = new VideoCapture(@"C:\Users\ipopov\RiderProjects\NasiaAutoTestsApp\NasiaAutoTestsApp\photo.jpg");
+            MessageBox.Show("+");
+            var image = videoCapture.QueryFrame().ToImage<Bgr, byte>();
+            var options = new ChromeOptions();
+            options.AddArgument("--use-fake-ui-for-media-stream");
+
+            var driver = new ChromeDriver(options);
+
+
+            var webCamElement = driver.FindElement(By.XPath("//div[@class='camera__preview']"));
+            var base64Image = Convert.ToBase64String(image.ToJpegData());
+            ((IJavaScriptExecutor)driver).ExecuteScript($"arguments[0].src = 'data:image/jpeg;base64,{base64Image}'", webCamElement);
+        }
+
+        public void TestWebcam()
+        {
+
+            // Инициализируем драйвер Chrome
+            IWebDriver driver = new ChromeDriver();
+            
+            // Создаем объект, содержащий настройки для эмуляции медиаустройств
+            ChromeOptions options = new ChromeOptions();
+            
+            options.AddArgument("--use-fake-device-for-media-stream");
+            options.AddArgument("--use-fake-ui-for-media-stream");
+            options.AddArgument("--use-file-for-fake-video-capture=C:/Users/ipopov/RiderProjects/NasiaAutoTestsApp/NasiaAutoTestsApp/bin/Debug/stream.mjpeg");
+            
+
+            // Запускаем драйвер с заданными настройками
+            driver = new ChromeDriver(options);
+
+            // Открываем сайт для тестирования функционала вебкамеры
+            driver.Navigate().GoToUrl("https://www.onlinemictest.com/webcam-test/");
         }
     }
 }
